@@ -3,11 +3,26 @@
 const errorOverlayMiddleware = require('react-dev-utils/errorOverlayMiddleware');
 const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMiddleware');
 const ignoredFiles = require('react-dev-utils/ignoredFiles');
+const graphqlHTTP = require('express-graphql');
 const config = require('./webpack.config.dev');
 const paths = require('./paths');
 
 const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
 const host = process.env.HOST || '0.0.0.0';
+
+const createGraphqlMiddleware = () => {
+  const schema = require("../server/schema");
+  return graphqlHTTP({
+    schema,
+    graphiql: true,
+    pretty: true
+  });
+};
+
+const middlewareWatcher = (createMiddleware) => {
+  return (req, res, next) => createMiddleware()(req, res, next);
+}
+
 
 module.exports = function(proxy, allowedHost) {
   return {
@@ -90,6 +105,8 @@ module.exports = function(proxy, allowedHost) {
       // it used the same host and port.
       // https://github.com/facebookincubator/create-react-app/issues/2272#issuecomment-302832432
       app.use(noopServiceWorkerMiddleware());
+      // GraphQL middleware
+      app.use('/graphql', middlewareWatcher(createGraphqlMiddleware));
     },
   };
 };

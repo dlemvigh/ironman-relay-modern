@@ -1,0 +1,11 @@
+type Query {
+  foo: String
+  me: User
+}
+
+type User {
+  id: ID
+  age: Int
+  gender: String
+  gender2: String
+}
