@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import { Nav, Navbar, NavItem, NavbarBrand, NavbarToggler } from 'reactstrap';
+// import { Nav } from 'react-bootstrap';
 import { graphql, fetchQuery } from 'relay-runtime';
-import logo from './logo.svg';
-import relay from './relay';
+import relay from '../relay';
 import './App.css';
 
 class App extends Component {
@@ -33,14 +34,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
+        <Navbar>
+          <NavbarBrand>
+            Ironman 70.3 Club
+          </NavbarBrand>
+          <NavbarToggler />
+          <Nav pullRight>
+            <NavItem>Test</NavItem>
+          </Nav>
+        </Navbar>
         <p className="App-intro">
-          ABC
-        </p>
-        <p>
           {this.state.text}
         </p>
       </div>
