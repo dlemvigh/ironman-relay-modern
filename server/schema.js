@@ -27,7 +27,7 @@ const {
         type: GraphQLString,
         resolve: () => "F"
       },
-      gender2: {
+      gender3: {
         type: GraphQLString,
         resolve: () => "FF"
       }

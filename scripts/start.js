@@ -93,7 +93,6 @@ choosePort(HOST, DEFAULT_PORT)
           keys.forEach(key => {
             delete require.cache[key];
           });
-          console.log("test")
           buildSchema();
         })
       });      

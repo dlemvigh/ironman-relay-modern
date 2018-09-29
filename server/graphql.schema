@@ -7,5 +7,5 @@ type User {
   id: ID
   age: Int
   gender: String
-  gender2: String
+  gender3: String
 }
