@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Nav, Navbar, NavItem, NavbarBrand, NavbarToggler } from 'reactstrap';
 import { graphql, fetchQuery } from 'relay-runtime';
 import relay from '../relay';
-import './App.css';
+import styles from './App.css';
 import logo from '../Media/ironman-logo.jpg';
 
 class App extends Component {
@@ -33,7 +33,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className={styles.App}>
         <Navbar>
           <NavbarBrand>
             Ironman 70.3 Club
@@ -43,7 +43,7 @@ class App extends Component {
             <NavItem>Test</NavItem>
           </Nav>
         </Navbar>
-        <img src={logo} alt="logo" />
+        <img src={logo} alt="logo" className={styles.logo} />
         <p className="App-intro">
           {this.state.text}
         </p>
