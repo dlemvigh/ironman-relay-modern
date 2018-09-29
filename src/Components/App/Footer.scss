@@ -1,0 +1,28 @@
+.footer {
+  position: absolute;
+  bottom: 0;
+  background-color: #555d61;
+  color: white;
+  width: 100%;    
+  margin-top: 2rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+
+  a, a:hover, a:focus {
+    color: white;
+  }
+  a {
+    text-decoration: underline;
+  }
+  a:hover {
+    text-decoration: none;
+  }  
+  
+  .footer-left {
+    float: left;
+  }  
+  .footer-right {
+    float: right;
+  }
+}
+

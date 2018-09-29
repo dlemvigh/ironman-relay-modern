@@ -9,6 +9,7 @@ const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const relayCompiler = require('relay-compiler-webpack-plugin');
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 
@@ -157,7 +158,7 @@ module.exports = {
           // In production, we use a plugin to extract that CSS to a file, but
           // in development "style" loader enables hot editing of CSS.
           {
-            test: /\.css$/,
+            test: /\.scss$/,
             use: [
               require.resolve('style-loader'),
               {
@@ -186,6 +187,9 @@ module.exports = {
                   ],
                 },
               },
+              {
+                loader: require.resolve('sass-loader')
+              }
             ],
           },
           // "file" loader makes sure those assets get served by WebpackDevServer.
@@ -211,6 +215,10 @@ module.exports = {
     ],
   },
   plugins: [
+    new relayCompiler({
+      schema: paths.graphqlSchema,
+      src: paths.appSrc
+    }),
     // Makes some environment variables available in index.html.
     // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
     // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
