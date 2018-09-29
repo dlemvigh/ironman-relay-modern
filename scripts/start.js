@@ -30,7 +30,7 @@ const openBrowser = require('react-dev-utils/openBrowser');
 const paths = require('../config/paths');
 const config = require('../config/webpack.config.dev');
 const createDevServerConfig = require('../config/webpackDevServer.config');
-
+const { buildSchema } = require('./util');
 const useYarn = fs.existsSync(paths.yarnLockFile);
 
 // Warn and crash if required files are missing
@@ -93,7 +93,8 @@ choosePort(HOST, DEFAULT_PORT)
           keys.forEach(key => {
             delete require.cache[key];
           });
-          require("./buildSchema")();
+          console.log("test")
+          buildSchema();
         })
       });      
     });

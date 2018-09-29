@@ -1,8 +1,3 @@
-const fs = require("fs");
-const { printSchema } = require("graphql/utilities");
-const schema = require("../server/schema");
-const paths = require('../config/paths');
+const { buildSchema } = require('./util');
 
-module.exports = () => {
-  fs.writeFileSync(paths.graphqlSchema, printSchema(schema));
-}
+buildSchema();

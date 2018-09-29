@@ -20,7 +20,7 @@ class App extends Component {
         me {
           id
           age
-          gender
+          gender2
         }
       }`
     ).then((value) => {
