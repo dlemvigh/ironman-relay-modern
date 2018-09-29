@@ -1,7 +1,7 @@
 {
   "extends": ["eslint:recommended", "react-app"],
   "rules": {
-    "indent": ["error", 2],
+    "indent": ["warn", 2],
     "no-console": "off"
   }
 }
