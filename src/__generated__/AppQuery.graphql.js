@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 61522d51de0287a84491fdf2ffcfe636
+ * @relayHash d1fd48988ab8b673cdb475df09237974
  */
 
 /* eslint-disable */
@@ -14,7 +14,7 @@ export type AppQueryResponse = {|
   +me: ?{|
     +id: ?string,
     +age: ?number,
-    +gender3: ?string,
+    +gender: ?string,
   |}
 |};
 export type AppQuery = {|
@@ -29,7 +29,7 @@ query AppQuery {
   me {
     id
     age
-    gender3
+    gender
   }
 }
 */
@@ -62,7 +62,7 @@ var v0 = [
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "gender3",
+        "name": "gender",
         "args": null,
         "storageKey": null
       }
@@ -74,7 +74,7 @@ return {
   "operationKind": "query",
   "name": "AppQuery",
   "id": null,
-  "text": "query AppQuery {\n  me {\n    id\n    age\n    gender3\n  }\n}\n",
+  "text": "query AppQuery {\n  me {\n    id\n    age\n    gender\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -93,5 +93,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '016ffa9e6277bb6a49f7034203933d0e';
+(node/*: any*/).hash = '51d5538f87783483338189df11948709';
 module.exports = node;
