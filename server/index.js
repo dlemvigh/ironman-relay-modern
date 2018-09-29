@@ -9,6 +9,7 @@ require('../config/env');
 
 const express = require("express");
 const graphqlHTTP = require("express-graphql");
+const  compression = require('compression')
 
 const paths = require('../config/paths');
 const schema = require("./schema");
@@ -17,6 +18,8 @@ const DEFAULT_PORT = parseInt(process.env.PORT, 10) || 3000;
 const HOST = process.env.HOST || '0.0.0.0';
 
 const app = express();
+
+app.use(compression())
 
 app.use("/graphql", graphqlHTTP({
   schema: schema,

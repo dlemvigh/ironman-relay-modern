@@ -3,6 +3,10 @@
     "plugins": [
       "relay",
       ["transform-imports", {
+        "react-router": {
+          "transform": "react-router/es/${member}",
+          "preventFullImport": true
+        },
         "react-bootstrap": {
             "transform": "react-bootstrap/lib/${member}",
             "preventFullImport": true
