@@ -16,9 +16,9 @@ require('../config/env');
 
 const fs = require('fs');
 const chalk = require('chalk');
+const chokidar = require('chokidar');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
-const clearConsole = require('react-dev-utils/clearConsole');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const {
   choosePort,
@@ -30,9 +30,8 @@ const openBrowser = require('react-dev-utils/openBrowser');
 const paths = require('../config/paths');
 const config = require('../config/webpack.config.dev');
 const createDevServerConfig = require('../config/webpackDevServer.config');
-
+const { buildSchema } = require('./util');
 const useYarn = fs.existsSync(paths.yarnLockFile);
-const isInteractive = process.stdout.isTTY;
 
 // Warn and crash if required files are missing
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
@@ -85,11 +84,18 @@ choosePort(HOST, DEFAULT_PORT)
       if (err) {
         return console.log(err);
       }
-      if (isInteractive) {
-        clearConsole();
-      }
       console.log(chalk.cyan('Starting the development server...\n'));
-      openBrowser(urls.localUrlForBrowser);
+      // openBrowser(urls.localUrlForBrowser);
+      const watcher = chokidar.watch('./server');
+      watcher.on('ready', function() {
+        watcher.on('all', function() {
+          var keys = Object.keys(require.cache).filter(x => (x.match("server") || x.match("scripts")) && x.indexOf("node_modules") == -1);
+          keys.forEach(key => {
+            delete require.cache[key];
+          });
+          buildSchema();
+        })
+      });      
     });
 
     ['SIGINT', 'SIGTERM'].forEach(function(sig) {
