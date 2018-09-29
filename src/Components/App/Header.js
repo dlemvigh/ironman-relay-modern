@@ -1,5 +1,5 @@
 import React from 'react';
-import { Collapse, Container, Nav, Navbar, NavItem, NavLink, NavbarBrand, NavbarToggler } from 'reactstrap';
+import { Collapse, Container, DropdownMenu, DropdownItem, DropdownToggle, Nav, Navbar, NavItem, NavLink, NavbarBrand, NavbarToggler, UncontrolledDropdown } from 'reactstrap';
 
 class Header extends React.Component {
   constructor(props) {
@@ -27,14 +27,41 @@ class Header extends React.Component {
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
-                  <NavLink href="/">Test</NavLink>
+                  <NavLink href="/">Graphs</NavLink>
                 </NavItem>
-                <NavItem>
-                  <NavLink href="/">Test</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink href="/">Test</NavLink>
-                </NavItem>
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                  Athletes
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem>
+                    Alice
+                    </DropdownItem>
+                    <DropdownItem>
+                    Bob
+                    </DropdownItem>
+                    <DropdownItem>
+                    Charlie
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
+                <UncontrolledDropdown nav inNavbar>
+                  <DropdownToggle nav caret>
+                  Seasons
+                  </DropdownToggle>
+                  <DropdownMenu right>
+                    <DropdownItem>
+                    Option 1
+                    </DropdownItem>
+                    <DropdownItem>
+                    Option 2
+                    </DropdownItem>
+                    <DropdownItem divider />
+                    <DropdownItem>
+                    All time
+                    </DropdownItem>
+                  </DropdownMenu>
+                </UncontrolledDropdown>
               </Nav>
             </Collapse>
           </Container>
