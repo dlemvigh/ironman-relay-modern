@@ -3,6 +3,7 @@ import { Nav, Navbar, NavItem, NavbarBrand, NavbarToggler } from 'reactstrap';
 import { graphql, fetchQuery } from 'relay-runtime';
 import relay from '../relay';
 import './App.css';
+import logo from '../Media/ironman-logo.jpg';
 
 class App extends Component {
   constructor() {
@@ -42,6 +43,7 @@ class App extends Component {
             <NavItem>Test</NavItem>
           </Nav>
         </Navbar>
+        <img src={logo} alt="logo" />
         <p className="App-intro">
           {this.state.text}
         </p>
