@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Nav, Navbar, NavItem, NavbarBrand, NavbarToggler } from 'reactstrap';
-// import { Nav } from 'react-bootstrap';
 import { graphql, fetchQuery } from 'relay-runtime';
 import relay from '../relay';
 import './App.css';
@@ -11,7 +10,7 @@ class App extends Component {
     this.state = {
       text: "Pending...",
       me: {}
-    }
+    };
   }
 
   componentDidMount() {

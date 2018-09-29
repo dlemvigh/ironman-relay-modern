@@ -16,13 +16,11 @@
     "css-loader": "0.28.7",
     "dotenv": "4.0.0",
     "dotenv-expand": "4.2.0",
-    "eslint": "4.10.0",
     "eslint-config-react-app": "^2.1.0",
     "eslint-loader": "1.9.0",
-    "eslint-plugin-flowtype": "2.39.1",
-    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-flowtype": "2.34.1",
+    "eslint-plugin-import": "2.6.0",
     "eslint-plugin-jsx-a11y": "5.1.1",
-    "eslint-plugin-react": "7.4.0",
     "express-graphql": "^0.6.12",
     "extract-text-webpack-plugin": "3.0.2",
     "file-loader": "1.1.5",
@@ -58,7 +56,8 @@
     "build": "node scripts/build.js",
     "serve": "node server/index.js",
     "test": "node scripts/test.js --env=jsdom",
-    "relay": "relay-compiler --src ./src --schema ./server/graphql.schema"
+    "relay": "relay-compiler --src ./src --schema ./server/graphql.schema",
+    "lint": "eslint src/"
   },
   "nodemonConfig": {
     "watch": [
@@ -113,6 +112,8 @@
     "babel-plugin-relay": "^1.6.2",
     "babel-plugin-transform-imports": "^1.5.1",
     "chokidar": "^2.0.4",
+    "eslint": "4.1.1",
+    "eslint-plugin-react": "7.1.0",
     "nodemon": "^1.18.4",
     "relay-compiler": "^1.6.2",
     "relay-compiler-webpack-plugin": "^0.11.0"
