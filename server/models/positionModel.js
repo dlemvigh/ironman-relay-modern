@@ -1,9 +1,13 @@
 const mongoose = require("mongoose");
 
 const positionSchema = new mongoose.Schema({
-  userId: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
     required: true
+  },
+  userDisplayName: {
+    type: String
   },
   week: {
     type: Number

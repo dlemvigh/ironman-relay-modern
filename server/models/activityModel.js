@@ -2,15 +2,17 @@ const mongoose = require("mongoose");
 const moment = require("moment");
 
 const activitySchema = new mongoose.Schema({
-  userId: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
     required: true        
   },
   userDisplayName: {
     type: String
   },
-  disciplineId: {
+  discipline: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: "Discipline",
     required: true
   },
   disciplineDisplayName: {
@@ -24,15 +26,13 @@ const activitySchema = new mongoose.Schema({
     type: Number,
     default: 0
   },  
+  week: {
+    type: Number
+  }
   date: {
     type: Date,
     default: Date.now
   }
-});
-
-activitySchema.virtual("week").get(function() {
-  const date = moment(this.date);
-  return date.isoYear() + date.isoWeek();
 });
 
 module.exports = mongoose.model("Activity", activitySchema);
