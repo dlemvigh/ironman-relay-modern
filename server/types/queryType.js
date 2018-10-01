@@ -9,7 +9,7 @@ const {
   disciplineType,
   userType,
 } = require("./index");
-const { nodeField } = require("./node");
+const { nodeField } = require('./nodeType');
 const {
   getDisciplines,
   getUser,

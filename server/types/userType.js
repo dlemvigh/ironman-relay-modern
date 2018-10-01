@@ -5,7 +5,7 @@ const {
   GraphQLID
 } = require("graphql");
 const { globalIdField } = require("graphql-relay");
-const { nodeInterface } = require('./node');
+const { nodeInterface } = require('./nodeType');
 
 const userType = new GraphQLObjectType({
   name: "User",

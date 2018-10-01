@@ -6,7 +6,7 @@ const {
   GraphQLID
 } = require("graphql");
 const { globalIdField } = require("graphql-relay");
-const { nodeInterface } = require('./node');
+const { nodeInterface } = require('./nodeType');
 
 const disciplineType = new GraphQLObjectType({
   name: "Discipline",
