@@ -19,6 +19,7 @@ const chalk = require('chalk');
 const chokidar = require('chokidar');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
+const mongoose = require('mongoose');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const {
   choosePort,
@@ -79,6 +80,12 @@ choosePort(HOST, DEFAULT_PORT)
       urls.lanUrlForConfig
     );
     const devServer = new WebpackDevServer(compiler, serverConfig);
+
+    mongoose.connect('mongodb://localhost/ironman', { 
+      useCreateIndex: true,
+      useNewUrlParser: true 
+    });    
+
     // Launch WebpackDevServer.
     devServer.listen(port, HOST, err => {
       if (err) {
@@ -89,7 +96,15 @@ choosePort(HOST, DEFAULT_PORT)
       const watcher = chokidar.watch('./server');
       watcher.on('ready', function() {
         watcher.on('all', function() {
-          var keys = Object.keys(require.cache).filter(x => (x.match("server") || x.match("scripts")) && x.indexOf("node_modules") == -1);
+          const filter = name => {
+            if (name.includes("node_modules")) return false;
+            if (name.includes("server")) {
+              return !name.includes("models");
+            }
+            return name.includes("scripts");
+          }
+
+          var keys = Object.keys(require.cache).filter(filter);
           keys.forEach(key => {
             delete require.cache[key];
           });
@@ -101,6 +116,7 @@ choosePort(HOST, DEFAULT_PORT)
     ['SIGINT', 'SIGTERM'].forEach(function(sig) {
       process.on(sig, function() {
         devServer.close();
+        mongoose.connection.close();
         process.exit();
       });
     });
