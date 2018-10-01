@@ -5,15 +5,23 @@ const {
   GraphQLNonNull
 } = require("graphql");
 
-const userType = require("./userType");
 const {
+  disciplineType,
+  userType 
+} = require("./index");
+const {
+  getDisciplines,
   getUser,
   getUsers
-} = require("../query/userQuery");
+} = require("../query");
 
 const queryType = new GraphQLObjectType({
   name: "Query",
   fields: () => ({
+    disciplines: {
+      type: new GraphQLList(disciplineType),
+      resolve: getDisciplines
+    },
     user: {
       type: userType,
       args: {

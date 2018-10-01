@@ -1,4 +1,14 @@
+type Discipline {
+  _id: ID
+  id: String
+  name: String
+  score: Float
+  unit: String
+  order: Int
+}
+
 type Query {
+  disciplines: [Discipline]
   user(id: String!): User
   users: [User]
 }
