@@ -7,8 +7,9 @@ const {
 
 const {
   disciplineType,
-  userType 
+  userType,
 } = require("./index");
+const { nodeField } = require("./node");
 const {
   getDisciplines,
   getUser,
@@ -35,7 +36,8 @@ const queryType = new GraphQLObjectType({
     users: {
       type: new GraphQLList(userType),
       resolve: getUsers
-    }
+    },
+    node: nodeField
   })
 })
 

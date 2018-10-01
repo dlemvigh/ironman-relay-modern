@@ -1,21 +1,39 @@
-type Discipline {
+type Discipline implements Node {
   _id: ID
-  id: String
+
+  """The ID of an object"""
+  id: ID!
   name: String
+  displayName: String
   score: Float
   unit: String
   order: Int
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
 }
 
 type Query {
   disciplines: [Discipline]
   user(id: String!): User
   users: [User]
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
 }
 
-type User {
+type User implements Node {
   _id: ID
-  id: String
+
+  """The ID of an object"""
+  id: ID!
   name: String
+  displayName: String
   active: Boolean
 }

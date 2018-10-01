@@ -12,6 +12,7 @@ mongoose.connect('mongodb://localhost/ironman', {
 const db = mongoose.connection;
 db.on('error', (...args) => {
   console.error('connection error: ', ...error);
+  mongoose.connection.close();
 });
 db.once('open', async () => {
   console.log("connection open");
@@ -27,20 +28,20 @@ async function populate() {
 
 async function populateUsers() {
   const users = [
-    { id: "alice", name: "Alice" },
-    { id: "bob", name: "Bob" },
-    { id: "charlie", name: "Charlie" }
+    { name: "alice", displayName: "Alice" },
+    { name: "bob", displayName: "Bob" },
+    { name: "charlie", displayName: "Charlie" }
   ];
   await Promise.all(users.map(user => ensure(userModel, user)));
 }
 
 async function populateDisciplines() {
   const disciplines = [
-    { id: "run", name: "Run", score: 5, unit: "km", order: 1 },
-    { id: "bike", name: "Bike", score: 1, unit: "km", order: 2 },
-    { id: "swim", name: "Swim", score: 25, unit: "km", order: 3 },
-    { id: "cal", name: "Caloric", score: .04, unit: "cal", order: 4 },
-    { id: "misc", name: "Misc", score: 25, unit: "hours", order: 5 },
+    { name: "run", displayName: "Run", score: 5, unit: "km", order: 1 },
+    { name: "bike", displayName: "Bike", score: 1, unit: "km", order: 2 },
+    { name: "swim", displayName: "Swim", score: 25, unit: "km", order: 3 },
+    { name: "cal", displayName: "Caloric", score: .04, unit: "cal", order: 4 },
+    { name: "misc", displayName: "Misc", score: 25, unit: "hours", order: 5 },
   ];
   await Promise.all(disciplines.map(disc => ensure(disciplineModel, disc)))
 }

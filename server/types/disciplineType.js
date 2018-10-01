@@ -5,6 +5,8 @@ const {
   GraphQLInt,
   GraphQLID
 } = require("graphql");
+const { globalIdField } = require("graphql-relay");
+const { nodeInterface } = require('./node');
 
 const disciplineType = new GraphQLObjectType({
   name: "Discipline",
@@ -12,10 +14,11 @@ const disciplineType = new GraphQLObjectType({
     _id: {
       type: GraphQLID
     },
-    id: {
+    id: globalIdField("Discipline"),
+    name: {
       type: GraphQLString
     },
-    name: {
+    displayName: {
       type: GraphQLString
     },
     score: {
@@ -27,7 +30,8 @@ const disciplineType = new GraphQLObjectType({
     order: {
       type: GraphQLInt
     }
-  })
+  }),
+  interfaces: [nodeInterface]
 });
 
 module.exports = disciplineType;
