@@ -1,3 +1,16 @@
+type Activity implements Node {
+  _id: ID
+
+  """The ID of an object"""
+  id: ID!
+  userId: ID
+  distance: Float
+  disciplineId: ID
+  score: Float
+  week: Int
+  date: String
+}
+
 type Discipline implements Node {
   _id: ID
 
@@ -17,7 +30,9 @@ interface Node {
 }
 
 type Query {
+  activities: [Activity]
   disciplines: [Discipline]
+  seasons: [Season]
   user(id: String!): User
   users: [User]
 
@@ -26,6 +41,17 @@ type Query {
     """The ID of an object"""
     id: ID!
   ): Node
+}
+
+type Season implements Node {
+  _id: ID
+
+  """The ID of an object"""
+  id: ID!
+  name: String
+  displayName: String
+  from: Int
+  to: Int
 }
 
 type User implements Node {
