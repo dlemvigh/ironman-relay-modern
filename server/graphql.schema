@@ -31,6 +31,16 @@ representation of dates and times using the Gregorian calendar.
 """
 scalar Date
 
+input DeleteActivityInput {
+  id: ID
+  clientMutationId: String
+}
+
+type DeleteActivityPayload {
+  id: ID
+  clientMutationId: String
+}
+
 type Discipline implements Node {
   """The ID of an object"""
   id: ID!
@@ -44,6 +54,7 @@ type Discipline implements Node {
 type Mutation {
   addActivity(input: AddActivityInput!): AddActivityPayload
   updateActivity(input: UpdateActivityInput!): UpdateActivityPayload
+  deleteActivity(input: DeleteActivityInput!): DeleteActivityPayload
 }
 
 """An object with an ID"""

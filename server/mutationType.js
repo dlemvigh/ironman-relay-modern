@@ -4,15 +4,16 @@ const {
 } = require("graphql");
 const {
   addActivityMutation,
-  updateActivityMutation
+  updateActivityMutation,
+  deleteActivityMutation
 } = require("./mutations");
 
 const mutationType = new GraphQLObjectType({
   name: "Mutation",
   fields: () => ({
     addActivity: addActivityMutation,
-    updateActivity: updateActivityMutation
-    // removeActivity: removeActivityMutation,
+    updateActivity: updateActivityMutation,
+    deleteActivity: deleteActivityMutation
     // addUser: addUserMutation,
     // addSeason: addSeasonMutation,
   })

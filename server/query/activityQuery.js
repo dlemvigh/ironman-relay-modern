@@ -7,6 +7,10 @@ const {
 const { getWeek } = require("./util");
 
 module.exports = {
+  async getActivity(id) {
+    return await activityModel.findById(id);
+  },
+
   async getActivities() {
     const activities = await activityModel.find({});
     return activities;
@@ -74,5 +78,13 @@ module.exports = {
     console.log("updated", newActivity, new Date());
 
     return newActivity;
+  },
+
+  async deleteActivity(id) {
+    const activity = await activityModel.findById(id);
+    if (activity == null) throw "Activity not found";
+
+    await activity.remove();
+    return id;
   }
 }
