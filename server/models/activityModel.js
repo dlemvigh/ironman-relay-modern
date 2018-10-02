@@ -4,7 +4,7 @@ const moment = require("moment");
 const activitySchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User"
+    ref: "User",
     required: true        
   },
   userDisplayName: {
@@ -28,7 +28,7 @@ const activitySchema = new mongoose.Schema({
   },  
   week: {
     type: Number
-  }
+  },
   date: {
     type: Date,
     default: Date.now
