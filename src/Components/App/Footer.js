@@ -4,7 +4,6 @@ import styles from './Footer.module.scss';
 
 class Footer extends React.Component {
   render() {
-    console.log(styles)
     return (
       <footer className={styles.footer}>
         <Container>

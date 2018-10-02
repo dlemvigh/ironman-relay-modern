@@ -27,5 +27,3 @@ app.use("/graphql", graphqlHTTP({
 app.use(express.static(paths.appBuild));
 
 app.listen(DEFAULT_PORT, HOST);
-
-console.log("test");

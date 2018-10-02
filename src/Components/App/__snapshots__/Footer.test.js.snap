@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<footer
+  className="footer"
+>
+  <Container
+    tag="div"
+  >
+    <div
+      className="left"
+    >
+      <strong>
+        Powered by Enthusiasm
+      </strong>
+    </div>
+    <div
+      className="right"
+    >
+      App icons by 
+      <a
+        href="https://icons8.com/"
+      >
+        Icons8
+      </a>
+    </div>
+  </Container>
+</footer>
+`;
