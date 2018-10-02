@@ -16,7 +16,7 @@ const {
   getActivities,
   getDisciplines,
   getSeasons,
-  getUser,
+  getUserByName,
   getUsers
 } = require("./query");
 
@@ -39,11 +39,10 @@ const queryType = new GraphQLObjectType({
       type: userType,
       args: {
         id: {
-          name: "id",
           type: new GraphQLNonNull(GraphQLString)
         }
       },
-      resolve: (_, { id }) => getUser(id)
+      resolve: (_, { id }) => getUserByName(id)
     },
     users: {
       type: new GraphQLList(userType),

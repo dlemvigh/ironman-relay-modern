@@ -4,15 +4,21 @@ const {
   disciplineModel,
   userModel,  
 } = require("../models");
+const { calcSummary } = require("./summaryQuery");
 const { getWeek } = require("./util");
 
 module.exports = {
-  async getActivity(id) {
+  async getActivityById(id) {
     return await activityModel.findById(id);
   },
 
   async getActivities() {
     const activities = await activityModel.find({});
+    return activities;
+  },  
+
+  async getActivitiesByUser(user) {
+    const activities = await activityModel.find({ user });
     return activities;
   },
 
@@ -42,13 +48,13 @@ module.exports = {
     }).save();
 
     if (activity == null) throw "Unable to add activity";
+    await calcSummary(user._id, week);
 
     return activity;
   },
 
   async updateActivity(input) {
-    console.log("update activity", input);
-    if (!(input.distance > 0)) throw "Distance must be >0";
+    // if (!(input.distance > 0)) throw "Distance must be >0";
 
     const [ activity, user, discipline ] = await Promise.all([
       activityModel.findById(input.id),
@@ -74,8 +80,7 @@ module.exports = {
     }).save();
 
     if (newActivity == null) throw "Unable to update activity";
-
-    console.log("updated", newActivity, new Date());
+    await calcSummary(user._id, week);
 
     return newActivity;
   },
@@ -85,6 +90,8 @@ module.exports = {
     if (activity == null) throw "Activity not found";
 
     await activity.remove();
+    await calcSummary(user, week);
+
     return id;
   }
 }

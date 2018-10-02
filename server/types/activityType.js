@@ -24,6 +24,9 @@ const activityType = new GraphQLObjectType({
     discipline: {
       type: disciplineType
     },
+    disciplineDisplayName: {
+      type: GraphQLString
+    },
     distance: {
       type: GraphQLFloat
     },

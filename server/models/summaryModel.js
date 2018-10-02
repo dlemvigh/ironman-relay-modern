@@ -38,4 +38,11 @@ const summarySchema = new mongoose.Schema({
   }
 });
 
+summarySchema.index({
+  user: 1,
+  week: 1
+}, {
+  unique: true
+});
+
 module.exports = mongoose.model("Summary", summarySchema);

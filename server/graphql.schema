@@ -4,6 +4,7 @@ type Activity implements Node {
   user: User
   userDisplayName: String
   discipline: Discipline
+  disciplineDisplayName: String
   distance: Float
   unit: String
   score: Float
