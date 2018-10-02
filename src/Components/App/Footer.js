@@ -1,16 +1,17 @@
 import React from "react";
 import { Container } from "reactstrap";
-import './Footer.scss';
+import styles from './Footer.module.scss';
 
 class Footer extends React.Component {
   render() {
+    console.log(styles)
     return (
-      <footer className="footer">
+      <footer className={styles.footer}>
         <Container>
-          <div className="footer-left">
+          <div className={styles.left}>
             <strong>Powered by Enthusiasm</strong>
           </div>
-          <div className="footer-right">
+          <div className={styles.right}>
             App icons by <a href="https://icons8.com/">Icons8</a>
           </div>
         </Container>
