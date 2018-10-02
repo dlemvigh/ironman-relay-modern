@@ -21,6 +21,9 @@ const activitySchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  unit: {
+    type: String,
+  },
   score: {
     type: Number,
     default: 0

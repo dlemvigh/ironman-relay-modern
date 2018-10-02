@@ -2,11 +2,13 @@ type Activity implements Node {
   """The ID of an object"""
   id: ID!
   user: User
+  userDisplayName: String
   discipline: Discipline
   distance: Float
+  unit: String
   score: Float
   week: Int
-  date: String
+  date: Date
 }
 
 input AddActivityInput {
@@ -41,6 +43,7 @@ type Discipline implements Node {
 
 type Mutation {
   addActivity(input: AddActivityInput!): AddActivityPayload
+  updateActivity(input: UpdateActivityInput!): UpdateActivityPayload
 }
 
 """An object with an ID"""
@@ -88,6 +91,20 @@ type Summary implements Node {
   user: User
   score: Float
   week: Int
+}
+
+input UpdateActivityInput {
+  id: ID
+  user: String
+  discipline: String
+  distance: Float
+  date: Date
+  clientMutationId: String
+}
+
+type UpdateActivityPayload {
+  activity: Activity
+  clientMutationId: String
 }
 
 type User implements Node {

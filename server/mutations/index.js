@@ -1,3 +1,4 @@
 module.exports = {
-  addActivityMutation: require("./addActivityMutation")
+  addActivityMutation: require("./addActivityMutation"),
+  updateActivityMutation: require("./updateActivityMutation"),
 }

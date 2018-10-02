@@ -3,18 +3,15 @@ const {
   GraphQLString
 } = require("graphql");
 const {
-  addActivityMutation
+  addActivityMutation,
+  updateActivityMutation
 } = require("./mutations");
 
 const mutationType = new GraphQLObjectType({
   name: "Mutation",
   fields: () => ({
-    // foo: {
-    //   type: GraphQLString,
-    //   resolve: () => "bar"
-    // },
     addActivity: addActivityMutation,
-    // editActivity: editActivityMutation,
+    updateActivity: updateActivityMutation
     // removeActivity: removeActivityMutation,
     // addUser: addUserMutation,
     // addSeason: addSeasonMutation,

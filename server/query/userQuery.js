@@ -4,7 +4,11 @@ const {
 } = require("../models");
 
 module.exports = {
-  async getUser(name) {
+  async getUserById(id) {
+    const user = await userModel.findById(id);
+    return user
+  },
+  async getUserByName(name) {
     const user = await userModel.findOne({ name });
     return user;
   },

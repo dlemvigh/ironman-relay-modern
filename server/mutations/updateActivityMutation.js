@@ -1,14 +1,18 @@
 const {
   GraphQLString,
-  GraphQLFloat
+  GraphQLFloat,
+  GraphQLID
 } = require("graphql");
 const { mutationWithClientMutationId } = require("graphql-relay");
 const { GraphQLDate } = require("graphql-iso-date");
-const { addActivity } = require("../query");
+const { updateActivity } = require("../query");
 
-const addActivityMutation = mutationWithClientMutationId({
-  name: "AddActivity",
+const updateActivityMutation = mutationWithClientMutationId({
+  name: "UpdateActivity",
   inputFields: () => ({
+    id: {
+      type: GraphQLID
+    },
     user: {
       type: GraphQLString,      
     },
@@ -28,12 +32,12 @@ const addActivityMutation = mutationWithClientMutationId({
     }
   }),
   mutateAndGetPayload(input) {
-    const activity = addActivity(input);
+    const activity = updateActivity(input);
     return { activity };
   }
 })
 
-module.exports = addActivityMutation;
+module.exports = updateActivityMutation;
 
 const {
   activityType

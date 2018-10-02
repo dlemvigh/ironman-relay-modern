@@ -6,20 +6,29 @@ const {
   GraphQLID
 } = require("graphql");
 const { globalIdField } = require("graphql-relay");
+const { GraphQLDate } = require("graphql-iso-date");
 const { nodeInterface } = require('./nodeType');
+const { getUserById } = require("../query");
 
 const activityType = new GraphQLObjectType({
   name: "Activity",
   fields: () => ({
     id: globalIdField("Activity"),
     user: {
-      type: userType
+      type: userType,
+      resolve: (root) => getUserById(root.user)
+    },
+    userDisplayName: {
+      type: GraphQLString
     },
     discipline: {
       type: disciplineType
     },
     distance: {
       type: GraphQLFloat
+    },
+    unit: {
+      type: GraphQLString
     },
     score: {
       type: GraphQLFloat
@@ -28,7 +37,7 @@ const activityType = new GraphQLObjectType({
       type: GraphQLInt
     },
     date: {
-      type: GraphQLString
+      type: GraphQLDate
     },
   }),
   interfaces: [nodeInterface]
