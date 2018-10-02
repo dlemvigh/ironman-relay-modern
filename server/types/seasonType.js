@@ -1,9 +1,8 @@
 const {
   GraphQLObjectType,
   GraphQLString,
-  GraphQLFloat,
+  GraphQLList,
   GraphQLInt,
-  GraphQLID
 } = require("graphql");
 const { globalIdField } = require("graphql-relay");
 const { nodeInterface } = require('./nodeType');
@@ -11,9 +10,6 @@ const { nodeInterface } = require('./nodeType');
 const seasonType = new GraphQLObjectType({
   name: "Season",
   fields: () => ({
-    _id: {
-      type: GraphQLID
-    },
     id: globalIdField("Season"),
     name: {
       type: GraphQLString
@@ -26,9 +22,14 @@ const seasonType = new GraphQLObjectType({
     },
     to: {
       type: GraphQLInt
+    },
+    activities: {
+      type: new GraphQLList(activityType)
     }
   }),
   interfaces: [nodeInterface]
 })
 
 module.exports = seasonType;
+
+const activityType = require("./activityType")

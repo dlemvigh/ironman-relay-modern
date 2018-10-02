@@ -8,18 +8,15 @@ const {
 const { globalIdField } = require("graphql-relay");
 const { nodeInterface } = require('./nodeType');
 
-const activityType = new GraphQLObjectType({
-  name: "Activity",
+const summaryType = new GraphQLObjectType({
+  name: "Summary",
   fields: () => ({
-    id: globalIdField("Activity"),
+    id: globalIdField("Summary"),
+    userId: {
+      type: GraphQLID,      
+    },
     user: {
       type: userType
-    },
-    discipline: {
-      type: disciplineType
-    },
-    distance: {
-      type: GraphQLFloat
     },
     score: {
       type: GraphQLFloat
@@ -27,14 +24,10 @@ const activityType = new GraphQLObjectType({
     week: {
       type: GraphQLInt
     },
-    date: {
-      type: GraphQLString
-    },
   }),
   interfaces: [nodeInterface]
 });
 
-module.exports = activityType;
+module.exports = summaryType;
 
-const disciplineType = require("./disciplineType");
 const userType = require("./userType");

@@ -11,9 +11,6 @@ const { nodeInterface } = require('./nodeType');
 const disciplineType = new GraphQLObjectType({
   name: "Discipline",
   fields: () => ({
-    _id: {
-      type: GraphQLID
-    },
     id: globalIdField("Discipline"),
     name: {
       type: GraphQLString
@@ -29,7 +26,7 @@ const disciplineType = new GraphQLObjectType({
     },
     order: {
       type: GraphQLInt
-    }
+    },
   }),
   interfaces: [nodeInterface]
 });

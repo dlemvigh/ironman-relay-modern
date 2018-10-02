@@ -13,7 +13,9 @@ const {
 } = require("./index");
 const { nodeField } = require('./nodeType');
 const {
+  getActivities,
   getDisciplines,
+  getSeasons,
   getUser,
   getUsers
 } = require("../query");
@@ -23,7 +25,7 @@ const queryType = new GraphQLObjectType({
   fields: () => ({
     activities: {
       type: new GraphQLList(activityType),
-      resolve: () => []
+      resolve: getActivities
     },
     disciplines: {
       type: new GraphQLList(disciplineType),
@@ -31,7 +33,7 @@ const queryType = new GraphQLObjectType({
     },
     seasons: {
       type: new GraphQLList(seasonType),
-      resolve: () => []
+      resolve: getSeasons
     },
     user: {
       type: userType,
