@@ -10,15 +10,15 @@ const {
   disciplineType,
   seasonType,
   userType,
-} = require("./index");
-const { nodeField } = require('./nodeType');
+} = require("./types");
+const { nodeField } = require('./types/nodeType');
 const {
   getActivities,
   getDisciplines,
   getSeasons,
   getUser,
   getUsers
-} = require("../query");
+} = require("./query");
 
 const queryType = new GraphQLObjectType({
   name: "Query",

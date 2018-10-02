@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const moment = require("moment");
 
 const activitySchema = new mongoose.Schema({
   user: {
@@ -26,13 +25,13 @@ const activitySchema = new mongoose.Schema({
     type: Number,
     default: 0
   },  
-  week: {
-    type: Number
-  },
   date: {
     type: Date,
     default: Date.now
-  }
+  },
+  week: {
+    type: Number
+  },
 });
 
 module.exports = mongoose.model("Activity", activitySchema);
