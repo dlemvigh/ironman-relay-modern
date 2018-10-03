@@ -7,13 +7,18 @@ const {
 } = require("graphql");
 const { globalIdField } = require("graphql-relay");
 const { nodeInterface } = require('./nodeType');
+const { getUserById } = require("../query");
 
 const positionType = new GraphQLObjectType({
   name: "Position",
   fields: () => ({
     id: globalIdField("Position"),
     user: {
-      type: userType
+      type: userType,
+      resolve: (root) => getUserById(root.user)
+    },
+    userDisplayName: {
+      type: GraphQLString
     },
     position: {
       type: GraphQLInt

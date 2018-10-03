@@ -1,4 +1,5 @@
 const {
+  GraphQLNonNull,
   GraphQLID
 } = require("graphql");
 const { mutationWithClientMutationId } = require("graphql-relay");
@@ -8,7 +9,7 @@ const deleteActivityMutation = mutationWithClientMutationId({
   name: "DeleteActivity",
   inputFields: () => ({
     id: {
-      type: GraphQLID
+      type: new GraphQLNonNull(GraphQLID)
     }
   }),
   outputFields: () => ({

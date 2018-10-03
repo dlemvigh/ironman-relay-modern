@@ -2,6 +2,7 @@ const {
   GraphQLObjectType,
   GraphQLList,
   GraphQLString,
+  GraphQLInt,
   GraphQLNonNull
 } = require("graphql");
 
@@ -10,6 +11,7 @@ const {
   disciplineType,
   seasonType,
   userType,
+  weekType
 } = require("./types");
 const { nodeField } = require('./types/nodeType');
 const {
@@ -47,6 +49,15 @@ const queryType = new GraphQLObjectType({
     users: {
       type: new GraphQLList(userType),
       resolve: getUsers
+    },
+    week: {
+      type: weekType,
+      args: {
+        week: {
+          type: new GraphQLNonNull(GraphQLInt)
+        }
+      },
+      resolve: (_, { week }) => ({ week })
     },
     node: nodeField
   })

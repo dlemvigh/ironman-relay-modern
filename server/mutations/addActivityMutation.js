@@ -1,6 +1,7 @@
 const {
   GraphQLString,
-  GraphQLFloat
+  GraphQLFloat,
+  GraphQLNonNull
 } = require("graphql");
 const { mutationWithClientMutationId } = require("graphql-relay");
 const { GraphQLDate } = require("graphql-iso-date");
@@ -10,16 +11,16 @@ const addActivityMutation = mutationWithClientMutationId({
   name: "AddActivity",
   inputFields: () => ({
     user: {
-      type: GraphQLString,      
+      type: new GraphQLNonNull(GraphQLString),
     },
     discipline: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
     },
     distance: {
-      type: GraphQLFloat,
+      type: new GraphQLNonNull(GraphQLFloat),
     },
     date: {
-      type: GraphQLDate
+      type: new GraphQLNonNull(GraphQLDate)
     }
   }),
   outputFields: () => ({

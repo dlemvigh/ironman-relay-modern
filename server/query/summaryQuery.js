@@ -2,6 +2,11 @@ const { activityModel, summaryModel } = require("../models");
 const { calcPositions } = require("./positionQuery");
 
 module.exports = {
+  async getSummariesByWeek(week) {
+    const summaries = await summaryModel.find({ week }).sort({ score: -1 });
+    return summaries;
+  },
+
   async calcSummary(user, week) {
 
     const result = await activityModel.aggregate([{

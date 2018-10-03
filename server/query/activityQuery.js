@@ -22,6 +22,16 @@ module.exports = {
     return activities;
   },
 
+  async getActivitiesByWeek(week) {
+    const activities = await activityModel.find({ week });
+    return activities;
+  },
+  
+  async getActivitiesForSummary({ user, week }) {
+    const activities = await activityModel.find({ user, week });
+    return activities;
+  },
+
   async addActivity(input) {
     if (!(input.distance > 0)) throw "Distance must be >0";
 

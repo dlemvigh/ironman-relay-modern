@@ -13,10 +13,10 @@ type Activity implements Node {
 }
 
 input AddActivityInput {
-  user: String
-  discipline: String
-  distance: Float
-  date: Date
+  user: String!
+  discipline: String!
+  distance: Float!
+  date: Date!
   clientMutationId: String
 }
 
@@ -33,7 +33,7 @@ representation of dates and times using the Gregorian calendar.
 scalar Date
 
 input DeleteActivityInput {
-  id: ID
+  id: ID!
   clientMutationId: String
 }
 
@@ -68,6 +68,7 @@ type Position implements Node {
   """The ID of an object"""
   id: ID!
   user: User
+  userDisplayName: String
   position: Int
   week: Int
 }
@@ -78,6 +79,7 @@ type Query {
   seasons: [Season]
   user(id: String!): User
   users: [User]
+  week(week: Int!): Week
 
   """Fetches an object given its ID"""
   node(
@@ -99,18 +101,19 @@ type Season implements Node {
 type Summary implements Node {
   """The ID of an object"""
   id: ID!
-  userId: ID
   user: User
+  userDisplayName: String
   score: Float
   week: Int
+  activities: [Activity]
 }
 
 input UpdateActivityInput {
-  id: ID
-  user: String
-  discipline: String
-  distance: Float
-  date: Date
+  id: ID!
+  user: String!
+  discipline: String!
+  distance: Float!
+  date: Date!
   clientMutationId: String
 }
 
@@ -125,6 +128,13 @@ type User implements Node {
   name: String
   displayName: String
   active: Boolean
+  activities: [Activity]
+  positions: [Position]
+  summaries: [Summary]
+}
+
+type Week {
+  week: Int
   activities: [Activity]
   positions: [Position]
   summaries: [Summary]
