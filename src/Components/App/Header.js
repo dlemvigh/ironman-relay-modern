@@ -1,6 +1,9 @@
 import React from 'react';
+import { graphql } from "react-relay";
 import { Collapse, Container, DropdownMenu, DropdownItem, DropdownToggle, Nav, Navbar, NavItem, NavLink, NavbarBrand, NavbarToggler, UncontrolledDropdown } from 'reactstrap';
 import { Link } from 'react-router'
+import HeaderMenuAthletes from "./HeaderMenuAthletes";
+import Renderer from "../Renderer";
 
 class Header extends React.Component {
   constructor(props) {
@@ -22,7 +25,7 @@ class Header extends React.Component {
         <Navbar light color="light" expand="md">
           <Container>
             <NavbarBrand tag={Link} to="/">
-              Ironman 70.3 Club
+              Ironman 70.3 Club 2.0
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
@@ -32,18 +35,15 @@ class Header extends React.Component {
                 </NavItem>
                 <UncontrolledDropdown nav inNavbar>
                   <DropdownToggle nav caret>
-                  Athletes
+                    Athletes
                   </DropdownToggle>
                   <DropdownMenu right>
-                    <DropdownItem tag={Link} to="Alice" activeClassName="active">
-                      Alice
-                    </DropdownItem>
-                    <DropdownItem tag={Link} to="Bob" activeClassName="active">
-                      Bob
-                    </DropdownItem>
-                    <DropdownItem tag={Link} to="Charlie" activeClassName="active">
-                      Charlie
-                    </DropdownItem>
+                    <Renderer
+                      query={HeaderQuery}
+                      Component={props => <>
+                        <HeaderMenuAthletes users={props.viewer.users} />
+                      </>}
+                    />
                   </DropdownMenu>
                 </UncontrolledDropdown>
                 <UncontrolledDropdown nav inNavbar>
@@ -71,5 +71,15 @@ class Header extends React.Component {
     );
   }
 }
+
+const HeaderQuery = graphql`
+  query HeaderQuery {
+    viewer {
+      users {
+        ...HeaderMenuAthletes_users
+      }
+    }
+  }
+`;
 
 export default Header;

@@ -1,13 +1,3 @@
-// @remove-on-eject-begin
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-// @remove-on-eject-end
-'use strict';
-
 const path = require('path');
 const webpack = require('webpack');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
@@ -20,7 +10,6 @@ const getCSSModuleLocalIdent = require('react-dev-utils/getCSSModuleLocalIdent')
 const getClientEnvironment = require('./env');
 const paths = require('./paths');
 const ManifestPlugin = require('webpack-manifest-plugin');
-const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const relayCompiler = require('relay-compiler-webpack-plugin');
 
@@ -186,14 +175,6 @@ module.exports = {
             options: {
               formatter: require.resolve('react-dev-utils/eslintFormatter'),
               eslintPath: require.resolve('eslint'),
-              // @remove-on-eject-begin
-              baseConfig: {
-                extends: [require.resolve('eslint-config-react-app')],
-                settings: { react: { version: '999.999.999' } },
-              },
-              ignore: false,
-              useEslintrc: false,
-              // @remove-on-eject-end
             },
             loader: require.resolve('eslint-loader'),
           },
@@ -236,22 +217,6 @@ module.exports = {
               customize: require.resolve(
                 'babel-preset-react-app/webpack-overrides'
               ),
-              // @remove-on-eject-begin
-              babelrc: false,
-              configFile: false,
-              presets: [require.resolve('babel-preset-react-app')],
-              // Make sure we have a unique cache identifier, erring on the
-              // side of caution.
-              // We remove this when the user ejects because the default
-              // is sane and uses Babel options. Instead of options, we use
-              // the react-scripts and babel-preset-react-app versions.
-              cacheIdentifier: getCacheIdentifier('development', [
-                'babel-plugin-named-asset-import',
-                'babel-preset-react-app',
-                'react-dev-utils',
-                'react-scripts',
-              ]),
-              // @remove-on-eject-end
               plugins: [
                 [
                   require.resolve('babel-plugin-named-asset-import'),
@@ -291,14 +256,6 @@ module.exports = {
               cacheDirectory: true,
               // Don't waste time on Gzipping the cache
               cacheCompression: false,
-              // @remove-on-eject-begin
-              cacheIdentifier: getCacheIdentifier('development', [
-                'babel-plugin-named-asset-import',
-                'babel-preset-react-app',
-                'react-dev-utils',
-                'react-scripts',
-              ]),
-              // @remove-on-eject-end
               // If an error happens in a package, it's possible to be
               // because it was compiled. Thus, we don't want the browser
               // debugger to show the original code. Instead, the code

@@ -74,12 +74,7 @@ type Position implements Node {
 }
 
 type Query {
-  activities: [Activity]
-  disciplines: [Discipline]
-  seasons: [Season]
-  user(id: String!): User
-  users: [User]
-  week(week: Int!): Week
+  viewer: Viewer
 
   """Fetches an object given its ID"""
   node(
@@ -131,6 +126,16 @@ type User implements Node {
   activities: [Activity]
   positions: [Position]
   summaries: [Summary]
+}
+
+type Viewer {
+  hello: String
+  activities: [Activity]
+  disciplines: [Discipline]
+  seasons: [Season]
+  user(id: String!): User
+  users: [User]
+  week(week: Int!): Week
 }
 
 type Week {
