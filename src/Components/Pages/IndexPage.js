@@ -9,13 +9,21 @@ const IndexPage = () => (
     <Renderer
       query={IndexPageQuery}
       Component={props => <>      
-        <ActivityForm {...props.viewer} />
+        <ActivityForm 
+          viewer={props.viewer}
+          disciplines={props.viewer.disciplines}
+          users={props.viewer.users}
+        />
+        <hr />
         {props.viewer.users.filter(user => user.activities.length > 0).map(user => (
           <React.Fragment key={user.name}>
             <h2>{user.displayName}</h2>
             <Activities activities={user.activities} />
           </React.Fragment>
         ))}
+        <hr/>
+        <h2>All activities</h2>
+        <Activities activities={props.viewer.activities} />
       </>}
     />
   </>
@@ -24,12 +32,16 @@ const IndexPage = () => (
 const IndexPageQuery = graphql`
   query IndexPageQuery {
     viewer {
+      ...ActivityForm_viewer
       users {
         name
         displayName
         activities {
           ...Activities_activities
         }  
+      }
+      activities {
+        ...Activities_activities
       }
       disciplines {
         ...ActivityForm_disciplines

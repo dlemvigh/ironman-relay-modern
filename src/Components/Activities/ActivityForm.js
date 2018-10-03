@@ -1,26 +1,47 @@
 import React from "react";
 import { createFragmentContainer, graphql } from "react-relay";
+import { Form, Row, Col, FormGroup, Label, Input, Button } from "reactstrap"
 import { commit } from "../../relay";
 
 export const ActivityForm = (props) => (
   // console.log(props),
-  <form onSubmit={handleSubmit}>
-    <select name="user">
-      {props.users.map(user =>
-        <option key={user.name} value={user.name}>{user.displayName}</option>
-      )}
-    </select>
-    <select name="discipline">
-      {props.disciplines.map(disc =>
-        <option key={disc.name} value={disc.name}>{disc.displayName}</option>
-      )}
-    </select>
-    <input 
-      type="number"
-      name="distance"
-    />
-    <button type="submit">Tilføj</button>
-  </form>
+  <Form onSubmit={handleSubmit}>
+    <Row form="true">
+      <Col md={3} sm={6}>
+        <FormGroup>
+          <Label>User</Label>
+          <Input type="select" name="user">
+            {props.users.map(user =>
+              <option key={user.name} value={user.name}>{user.displayName}</option>
+            )}
+          </Input>
+        </FormGroup>
+      </Col>
+      <Col md={3} sm={6}>
+        <FormGroup>
+          <Label>Discipline</Label>
+          <Input type="select" name="discipline">
+            {props.disciplines.map(disc =>
+              <option key={disc.name} value={disc.name}>{disc.displayName}</option>
+            )}
+          </Input>
+        </FormGroup>
+      </Col>
+      <Col md={3} sm={6}>
+        <FormGroup>
+          <Label>Distance</Label>
+          <Input 
+            type="number"
+            name="distance"
+          />
+        </FormGroup>
+      </Col>
+      <Col md={3} sm={6}>
+        <Label>&nbsp;</Label><br />
+        <Button type="submit" color="primary">Tilføj</Button>
+      </Col>
+    </Row>
+  </Form>
 )
 
 const handleSubmit = (event) => {
@@ -58,11 +79,16 @@ const mutation = graphql`
     addActivity(input: $input) {
       activity {
         id
+        userDisplayName
         user {
           id
         }
+        disciplineDisplayName
+        distance
         unit
         score
+        week
+        date
       }
     }
   }
@@ -71,6 +97,9 @@ const mutation = graphql`
 export const ActivityFormContainer = createFragmentContainer(
   ActivityForm,
   graphql`
+    fragment ActivityForm_viewer on Viewer {
+      id
+    }
     fragment ActivityForm_disciplines on Discipline @relay(plural: true) {
       name
       displayName
