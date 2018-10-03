@@ -1,10 +1,141 @@
-type Query {
-  foo: String
-  me: User
+type Activity implements Node {
+  """The ID of an object"""
+  id: ID!
+  user: User
+  userDisplayName: String
+  discipline: Discipline
+  disciplineDisplayName: String
+  distance: Float
+  unit: String
+  score: Float
+  week: Int
+  date: Date
 }
 
-type User {
+input AddActivityInput {
+  user: String!
+  discipline: String!
+  distance: Float!
+  date: Date!
+  clientMutationId: String
+}
+
+type AddActivityPayload {
+  activity: Activity
+  clientMutationId: String
+}
+
+"""
+A date string, such as 2007-12-03, compliant with the `full-date` format
+outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for
+representation of dates and times using the Gregorian calendar.
+"""
+scalar Date
+
+input DeleteActivityInput {
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteActivityPayload {
   id: ID
-  age: Int
-  gender: String
+  clientMutationId: String
+}
+
+type Discipline implements Node {
+  """The ID of an object"""
+  id: ID!
+  name: String
+  displayName: String
+  score: Float
+  unit: String
+  order: Int
+}
+
+type Mutation {
+  addActivity(input: AddActivityInput!): AddActivityPayload
+  updateActivity(input: UpdateActivityInput!): UpdateActivityPayload
+  deleteActivity(input: DeleteActivityInput!): DeleteActivityPayload
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+type Position implements Node {
+  """The ID of an object"""
+  id: ID!
+  user: User
+  userDisplayName: String
+  position: Int
+  week: Int
+}
+
+type Query {
+  activities: [Activity]
+  disciplines: [Discipline]
+  seasons: [Season]
+  user(id: String!): User
+  users: [User]
+  week(week: Int!): Week
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Season implements Node {
+  """The ID of an object"""
+  id: ID!
+  name: String
+  displayName: String
+  from: Int
+  to: Int
+  activities: [Activity]
+}
+
+type Summary implements Node {
+  """The ID of an object"""
+  id: ID!
+  user: User
+  userDisplayName: String
+  score: Float
+  week: Int
+  activities: [Activity]
+}
+
+input UpdateActivityInput {
+  id: ID!
+  user: String!
+  discipline: String!
+  distance: Float!
+  date: Date!
+  clientMutationId: String
+}
+
+type UpdateActivityPayload {
+  activity: Activity
+  clientMutationId: String
+}
+
+type User implements Node {
+  """The ID of an object"""
+  id: ID!
+  name: String
+  displayName: String
+  active: Boolean
+  activities: [Activity]
+  positions: [Position]
+  summaries: [Summary]
+}
+
+type Week {
+  week: Int
+  activities: [Activity]
+  positions: [Position]
+  summaries: [Summary]
 }
