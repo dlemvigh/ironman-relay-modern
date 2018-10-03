@@ -25,7 +25,7 @@ class Header extends React.Component {
         <Navbar light color="light" expand="md">
           <Container>
             <NavbarBrand tag={Link} to="/">
-              Ironman 70.3 Club
+              Ironman 70.3 Club 2.0
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
