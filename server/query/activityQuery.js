@@ -13,7 +13,7 @@ module.exports = {
   },
 
   async getActivities() {
-    const activities = await activityModel.find({});
+    const activities = await activityModel.find({}).sort({ date: -1 });
     return activities;
   },  
 

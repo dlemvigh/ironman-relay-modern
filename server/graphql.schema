@@ -128,7 +128,9 @@ type User implements Node {
   summaries: [Summary]
 }
 
-type Viewer {
+type Viewer implements Node {
+  """The ID of an object"""
+  id: ID!
   hello: String
   activities: [Activity]
   disciplines: [Discipline]

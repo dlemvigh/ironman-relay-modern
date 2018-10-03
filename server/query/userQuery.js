@@ -15,7 +15,7 @@ module.exports = {
   },
 
   async getUsers() {
-    const users = await userModel.find({});
+    const users = await userModel.find({}).sort({ name: 1 });
     return users;
   }
 }

@@ -7,7 +7,7 @@ module.exports = {
   },
 
   async getDisciplines() {
-    const disciplines = await disciplineModel.find({});
+    const disciplines = await disciplineModel.find({}).sort({ order: 1 });
     return disciplines;
   }
 }

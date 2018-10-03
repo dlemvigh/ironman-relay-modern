@@ -17,7 +17,7 @@ module.exports = {
 
     if (result) {
       const [{ _id: userDisplayName, score }] = result;
-      await summaryModel.update({
+      await summaryModel.updateMany({
         user, week
       }, {
         user,

@@ -9,32 +9,26 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type HeaderMenuAthletes_users$ref: FragmentReference;
-export type HeaderMenuAthletes_users = $ReadOnlyArray<{|
-  +id: string,
+declare export opaque type ActivityForm_disciplines$ref: FragmentReference;
+export type ActivityForm_disciplines = $ReadOnlyArray<{|
   +name: ?string,
   +displayName: ?string,
-  +$refType: HeaderMenuAthletes_users$ref,
+  +unit: ?string,
+  +score: ?number,
+  +$refType: ActivityForm_disciplines$ref,
 |}>;
 */
 
 
 const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
-  "name": "HeaderMenuAthletes_users",
-  "type": "User",
+  "name": "ActivityForm_disciplines",
+  "type": "Discipline",
   "metadata": {
     "plural": true
   },
   "argumentDefinitions": [],
   "selections": [
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "id",
-      "args": null,
-      "storageKey": null
-    },
     {
       "kind": "ScalarField",
       "alias": null,
@@ -48,9 +42,23 @@ const node/*: ConcreteFragment*/ = {
       "name": "displayName",
       "args": null,
       "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "unit",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "score",
+      "args": null,
+      "storageKey": null
     }
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'c068348fe0064ffae657d06b2156e205';
+(node/*: any*/).hash = 'afd9008561b6342dc57d2db582dd7755';
 module.exports = node;

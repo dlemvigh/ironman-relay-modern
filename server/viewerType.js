@@ -14,9 +14,13 @@ const {
   getUsers
 } = require("./query");
 
+const { globalIdField } = require("graphql-relay");
+const { nodeInterface } = require('./types/nodeType');
+
 const viewerType = new GraphQLObjectType({
   name: "Viewer",
   fields: () => ({
+    id: globalIdField("Viewer"),
     hello: {
       type: GraphQLString,
       resolve: () => "Hello, world!"
@@ -55,7 +59,8 @@ const viewerType = new GraphQLObjectType({
       },
       resolve: (_, { week }) => ({ week })
     },
-  })
+  }),
+  interfaces: [nodeInterface]
 })
 
 module.exports = viewerType;

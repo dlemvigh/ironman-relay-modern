@@ -9,32 +9,24 @@
 /*::
 import type { ConcreteFragment } from 'relay-runtime';
 import type { FragmentReference } from "relay-runtime";
-declare export opaque type HeaderMenuAthletes_users$ref: FragmentReference;
-export type HeaderMenuAthletes_users = $ReadOnlyArray<{|
-  +id: string,
+declare export opaque type ActivityForm_users$ref: FragmentReference;
+export type ActivityForm_users = $ReadOnlyArray<{|
   +name: ?string,
   +displayName: ?string,
-  +$refType: HeaderMenuAthletes_users$ref,
+  +$refType: ActivityForm_users$ref,
 |}>;
 */
 
 
 const node/*: ConcreteFragment*/ = {
   "kind": "Fragment",
-  "name": "HeaderMenuAthletes_users",
+  "name": "ActivityForm_users",
   "type": "User",
   "metadata": {
     "plural": true
   },
   "argumentDefinitions": [],
   "selections": [
-    {
-      "kind": "ScalarField",
-      "alias": null,
-      "name": "id",
-      "args": null,
-      "storageKey": null
-    },
     {
       "kind": "ScalarField",
       "alias": null,
@@ -52,5 +44,5 @@ const node/*: ConcreteFragment*/ = {
   ]
 };
 // prettier-ignore
-(node/*: any*/).hash = 'c068348fe0064ffae657d06b2156e205';
+(node/*: any*/).hash = '4a30092d3b56aa1ae00986023ab50c3f';
 module.exports = node;

@@ -5,4 +5,5 @@ module.exports = {
   seasonModel: require("./seasonModel"),
   summaryModel: require("./summaryModel"),
   userModel: require("./userModel"),
+  viewerModel: require("./viewerModel")
 };

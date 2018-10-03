@@ -90,7 +90,7 @@ checkBrowsers(paths.appPath)
     );
     const devServer = new WebpackDevServer(compiler, serverConfig);
 
-    mongoose.connect('mongodb://localhost/ironman', { 
+    mongoose.connect('mongodb://localhost/ironman2', { 
       useCreateIndex: true,
       useNewUrlParser: true 
     });    

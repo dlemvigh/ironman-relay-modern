@@ -9,7 +9,7 @@ module.exports = {
   async calcPositions(week) {
     const summaries = await summaryModel.find({ week }).sort({ score: -1 });
     await Promise.all(summaries.map(async ({ user, userDisplayName, week }, index) => {
-      await positionModel.update({
+      await positionModel.updateMany({
         user, 
         week
       }, {

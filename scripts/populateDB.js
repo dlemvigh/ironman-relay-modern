@@ -5,13 +5,13 @@ const {
   userModel
 } = require("../server/models");
 
-mongoose.connect('mongodb://localhost/ironman', { 
+mongoose.connect('mongodb://localhost/ironman2', { 
   useCreateIndex: true,
   useNewUrlParser: true 
 });
 const db = mongoose.connection;
 db.on('error', (...args) => {
-  console.error('connection error: ', ...error);
+  console.error('connection error: ', ...args);
   mongoose.connection.close();
 });
 db.once('open', async () => {

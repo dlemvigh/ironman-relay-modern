@@ -7,20 +7,21 @@ const HeaderMenuAthletes = ({ users }) => (
   <>
     {users.map(user =>
       <DropdownItem key={user.id} tag={Link} to={user.name} activeClassName="active">
-        {user.name}
+        {user.displayName}
       </DropdownItem>
     )}
   </>
 );
 
-export const container = createFragmentContainer(
+export const HeaderMenuAthletesContainer = createFragmentContainer(
   HeaderMenuAthletes, 
   graphql`
     fragment HeaderMenuAthletes_users on User @relay(plural: true) {
       id
       name
+      displayName
     }
   `
 );
 
-export default container;
+export default HeaderMenuAthletesContainer;

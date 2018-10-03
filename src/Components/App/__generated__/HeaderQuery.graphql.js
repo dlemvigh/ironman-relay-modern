@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 7679650c0f02834249e2858f962ce27c
+ * @relayHash 324fa6e6765dc67965543abeaa38195c
  */
 
 /* eslint-disable */
@@ -32,21 +32,31 @@ query HeaderQuery {
       ...HeaderMenuAthletes_users
       id
     }
+    id
   }
 }
 
 fragment HeaderMenuAthletes_users on User {
   id
   name
+  displayName
 }
 */
 
-const node/*: ConcreteRequest*/ = {
+const node/*: ConcreteRequest*/ = (function(){
+var v0 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "id",
+  "args": null,
+  "storageKey": null
+};
+return {
   "kind": "Request",
   "operationKind": "query",
   "name": "HeaderQuery",
   "id": null,
-  "text": "query HeaderQuery {\n  viewer {\n    users {\n      ...HeaderMenuAthletes_users\n      id\n    }\n  }\n}\n\nfragment HeaderMenuAthletes_users on User {\n  id\n  name\n}\n",
+  "text": "query HeaderQuery {\n  viewer {\n    users {\n      ...HeaderMenuAthletes_users\n      id\n    }\n    id\n  }\n}\n\nfragment HeaderMenuAthletes_users on User {\n  id\n  name\n  displayName\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -57,8 +67,8 @@ const node/*: ConcreteRequest*/ = {
     "selections": [
       {
         "kind": "LinkedField",
-        "alias": "viewer",
-        "name": "__viewer_viewer",
+        "alias": null,
+        "name": "viewer",
         "storageKey": null,
         "args": null,
         "concreteType": "Viewer",
@@ -107,36 +117,30 @@ const node/*: ConcreteRequest*/ = {
             "concreteType": "User",
             "plural": true,
             "selections": [
-              {
-                "kind": "ScalarField",
-                "alias": null,
-                "name": "id",
-                "args": null,
-                "storageKey": null
-              },
+              v0,
               {
                 "kind": "ScalarField",
                 "alias": null,
                 "name": "name",
                 "args": null,
                 "storageKey": null
+              },
+              {
+                "kind": "ScalarField",
+                "alias": null,
+                "name": "displayName",
+                "args": null,
+                "storageKey": null
               }
             ]
-          }
+          },
+          v0
         ]
-      },
-      {
-        "kind": "LinkedHandle",
-        "alias": null,
-        "name": "viewer",
-        "args": null,
-        "handle": "viewer",
-        "key": "",
-        "filters": null
       }
     ]
   }
 };
+})();
 // prettier-ignore
 (node/*: any*/).hash = '474bb8f0c095ed50b552de46f897b958';
 module.exports = node;

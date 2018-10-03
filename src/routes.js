@@ -2,6 +2,7 @@ import React from "react";
 import { Router, Route, IndexRoute } from "react-router";
 
 import App from "./Components/App/App";
+import IndexPage from "./Components/Pages/IndexPage";
 
 const Routes = (props) => (
   <Router {...props}>
@@ -10,7 +11,7 @@ const Routes = (props) => (
       component={App}
     >
       <IndexRoute
-        component={() => <span>index</span>}
+        component={IndexPage}
       />
       <Route
         path="graphs"
