@@ -137,7 +137,7 @@
       "react-app"
     ],
     "plugins": [
-      "relay",
+      ["relay"],
       [
         "transform-imports",
         {

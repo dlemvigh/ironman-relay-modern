@@ -1,5 +1,7 @@
 import React from "react";
 import { Container } from "reactstrap";
+import { graphql } from 'react-relay';
+import Renderer from "../Renderer";
 
 class Main extends React.Component {
   render() {
@@ -14,3 +16,4 @@ class Main extends React.Component {
 }
 
 export default Main;
+

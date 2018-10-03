@@ -1,63 +1,16 @@
 const {
   GraphQLObjectType,
-  GraphQLList,
-  GraphQLString,
-  GraphQLInt,
-  GraphQLNonNull
 } = require("graphql");
 
-const {
-  activityType,
-  disciplineType,
-  seasonType,
-  userType,
-  weekType
-} = require("./types");
+const viewerType = require("./viewerType");
 const { nodeField } = require('./types/nodeType');
-const {
-  getActivities,
-  getDisciplines,
-  getSeasons,
-  getUserByName,
-  getUsers
-} = require("./query");
 
 const queryType = new GraphQLObjectType({
   name: "Query",
   fields: () => ({
-    activities: {
-      type: new GraphQLList(activityType),
-      resolve: getActivities
-    },
-    disciplines: {
-      type: new GraphQLList(disciplineType),
-      resolve: getDisciplines
-    },
-    seasons: {
-      type: new GraphQLList(seasonType),
-      resolve: getSeasons
-    },
-    user: {
-      type: userType,
-      args: {
-        id: {
-          type: new GraphQLNonNull(GraphQLString)
-        }
-      },
-      resolve: (_, { id }) => getUserByName(id)
-    },
-    users: {
-      type: new GraphQLList(userType),
-      resolve: getUsers
-    },
-    week: {
-      type: weekType,
-      args: {
-        week: {
-          type: new GraphQLNonNull(GraphQLInt)
-        }
-      },
-      resolve: (_, { week }) => ({ week })
+    viewer: {
+      type: viewerType,
+      resolve: () => ({})
     },
     node: nodeField
   })
