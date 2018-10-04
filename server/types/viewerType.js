@@ -12,10 +12,10 @@ const {
   getSeasons,
   getUserByName,
   getUsers
-} = require("./query");
+} = require("../query");
 
 const { globalIdField } = require("graphql-relay");
-const { nodeInterface } = require('./types/nodeType');
+const { nodeInterface } = require('./nodeType');
 
 const viewerType = new GraphQLObjectType({
   name: "Viewer",
@@ -71,4 +71,4 @@ const {
   seasonType,
   userType,
   weekType
-} = require("./types");
+} = require(".");

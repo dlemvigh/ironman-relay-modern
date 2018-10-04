@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 3f0f0c69906c30014f8057fb60111830
+ * @relayHash 24e054b506b23f6001618a764ef5818a
  */
 
 /* eslint-disable */
@@ -23,17 +23,23 @@ export type ActivityFormMutationResponse = {|
   +addActivity: ?{|
     +activity: ?{|
       +id: string,
-      +userDisplayName: ?string,
       +user: ?{|
         +id: string
       |},
+      +userDisplayName: ?string,
       +disciplineDisplayName: ?string,
       +distance: ?number,
       +unit: ?string,
       +score: ?number,
       +week: ?number,
       +date: ?any,
-    |}
+    |},
+    +user: ?{|
+      +id: string
+    |},
+    +viewer: ?{|
+      +id: string
+    |},
   |}
 |};
 export type ActivityFormMutation = {|
@@ -50,16 +56,22 @@ mutation ActivityFormMutation(
   addActivity(input: $input) {
     activity {
       id
-      userDisplayName
       user {
         id
       }
+      userDisplayName
       disciplineDisplayName
       distance
       unit
       score
       week
       date
+    }
+    user {
+      id
+    }
+    viewer {
+      id
     }
   }
 }
@@ -82,6 +94,19 @@ v1 = {
   "storageKey": null
 },
 v2 = [
+  v1
+],
+v3 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "user",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "User",
+  "plural": false,
+  "selections": v2
+},
+v4 = [
   {
     "kind": "LinkedField",
     "alias": null,
@@ -108,24 +133,13 @@ v2 = [
         "plural": false,
         "selections": [
           v1,
+          v3,
           {
             "kind": "ScalarField",
             "alias": null,
             "name": "userDisplayName",
             "args": null,
             "storageKey": null
-          },
-          {
-            "kind": "LinkedField",
-            "alias": null,
-            "name": "user",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "User",
-            "plural": false,
-            "selections": [
-              v1
-            ]
           },
           {
             "kind": "ScalarField",
@@ -170,6 +184,17 @@ v2 = [
             "storageKey": null
           }
         ]
+      },
+      v3,
+      {
+        "kind": "LinkedField",
+        "alias": null,
+        "name": "viewer",
+        "storageKey": null,
+        "args": null,
+        "concreteType": "Viewer",
+        "plural": false,
+        "selections": v2
       }
     ]
   }
@@ -179,7 +204,7 @@ return {
   "operationKind": "mutation",
   "name": "ActivityFormMutation",
   "id": null,
-  "text": "mutation ActivityFormMutation(\n  $input: AddActivityInput!\n) {\n  addActivity(input: $input) {\n    activity {\n      id\n      userDisplayName\n      user {\n        id\n      }\n      disciplineDisplayName\n      distance\n      unit\n      score\n      week\n      date\n    }\n  }\n}\n",
+  "text": "mutation ActivityFormMutation(\n  $input: AddActivityInput!\n) {\n  addActivity(input: $input) {\n    activity {\n      id\n      user {\n        id\n      }\n      userDisplayName\n      disciplineDisplayName\n      distance\n      unit\n      score\n      week\n      date\n    }\n    user {\n      id\n    }\n    viewer {\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -187,16 +212,16 @@ return {
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
-    "selections": v2
+    "selections": v4
   },
   "operation": {
     "kind": "Operation",
     "name": "ActivityFormMutation",
     "argumentDefinitions": v0,
-    "selections": v2
+    "selections": v4
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'ca7fed39e8da1ef5b601bdaf9c31e121';
+(node/*: any*/).hash = '5f35e3593270283fe2b8afa5caeca480';
 module.exports = node;

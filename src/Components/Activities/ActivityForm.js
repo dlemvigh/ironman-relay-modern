@@ -62,33 +62,46 @@ const handleSubmit = (event) => {
     },
     updater(store) {
       const payload = store.getRootField("addActivity");
-      const newActivity = payload.getLinkedRecord("activity");
-      const id = newActivity.getLinkedRecord("user").getValue("id");
-      const user = store.get(id);
-      const oldActs = user.getLinkedRecords("activities") || [];
-      const newActs = [...oldActs, newActivity];
-      user.setLinkedRecords(newActs, "activities");
+
+      const activity = payload.getLinkedRecord("activity");
+      const user = payload.getLinkedRecord("user");
+      const viewer = payload.getLinkedRecord("viewer");
+
+      append(user, "activities", activity);
+      append(viewer, "activities", activity)
+
       debugger;
     }
   });
   // event.currentTarget.reset();
 };
 
+const append = (root, name, item) => {
+  const list = root.getLinkedRecords(name) || [];
+  root.setLinkedRecords([...list, item], name);
+}
+
 const mutation = graphql`
   mutation ActivityFormMutation($input: AddActivityInput!) {
     addActivity(input: $input) {
       activity {
         id
-        userDisplayName
         user {
           id
         }
+        userDisplayName
         disciplineDisplayName
         distance
         unit
         score
         week
         date
+      }
+      user {
+        id
+      }
+      viewer {
+        id
       }
     }
   }

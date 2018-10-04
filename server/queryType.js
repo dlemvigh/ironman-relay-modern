@@ -2,7 +2,7 @@ const {
   GraphQLObjectType,
 } = require("graphql");
 
-const viewerType = require("./viewerType");
+const viewerType = require("./types/viewerType");
 const { nodeField } = require('./types/nodeType');
 
 const queryType = new GraphQLObjectType({

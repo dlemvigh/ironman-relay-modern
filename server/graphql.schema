@@ -22,6 +22,8 @@ input AddActivityInput {
 
 type AddActivityPayload {
   activity: Activity
+  user: User
+  viewer: Viewer
   clientMutationId: String
 }
 
