@@ -1,10 +1,11 @@
 import React from "react";
-import { createFragmentContainer, graphql } from "react-relay";
+import { commitMutation, createFragmentContainer, graphql } from "react-relay";
 import { Form, Row, Col, FormGroup, Label, Input, Button } from "reactstrap"
-import { commit } from "../../relay";
+import { environment } from "../../relay/environment";
+import { addActivityMutation, addActivityUpdater } from "../../relay/addActivityMutation";
+import { editActivityMutation } from "../../relay/editActivityMutation";
 
 export const ActivityForm = (props) => (
-  // console.log(props),
   <Form onSubmit={handleSubmit}>
     {props.activity && <input type="hidden" name="id" value={props.activity.id} />}
     <Row form="true">
@@ -68,102 +69,31 @@ const handleSubmit = (event) => {
   event.preventDefault();
   const { elements } = event.currentTarget;
   const input = {
-    id: elements.activityID.value,
     user: elements.user.value,
     discipline: elements.discipline.value,
     distance: elements.distance.value,
     date: "2018-10-03"
   }
 
-  // commit({ 
-  //   mutation: addActivityMutation, 
-  //   input, 
-  //   onCompleted(...args) { 
-  //     console.log("complete", ...args) 
-  //   },
-  //   updater(store) {
-  //     const payload = store.getRootField("addActivity");
+  const isEdit = !!elements.activityID;
 
-  //     const activity = payload.getLinkedRecord("activity");
-  //     const user = payload.getLinkedRecord("user");
-  //     const viewer = payload.getLinkedRecord("viewer");
+  if (isEdit) {
+    input.id = elements.activityID.value;
+    commitMutation(environment, {
+      mutation: editActivityMutation, 
+      variables: { input }, 
+    });
+  } else {
+    commitMutation(environment, {
+      mutation: addActivityMutation, 
+      variables: { input }, 
+      updater(store) {
+        addActivityUpdater(store);
+      }
+    });  
+  }
 
-  //     append(user, "activities", activity);
-  //     append(viewer, "activities", activity)
-  //   }
-  // });
-  commit({ 
-    mutation: editActivityMutation, 
-    input, 
-    onCompleted(...args) { 
-      console.log("complete", ...args) 
-    },
-    updater(store) {
-      // const payload = store.getRootField("updateActivity");
-
-
-      // const activity = payload.getLinkedRecord("activity");
-      // const user = payload.getLinkedRecord("user");
-      // const viewer = payload.getLinkedRecord("viewer");
-
-      // append(user, "activities", activity);
-      // append(viewer, "activities", activity)
-      // debugger;
-    }
-  });
-  event.currentTarget.reset();
 };
-
-const append = (root, name, item) => {
-  const list = root.getLinkedRecords(name) || [];
-  root.setLinkedRecords([...list, item], name);
-}
-
-const addActivityMutation = graphql`
-  mutation ActivityForm_Add_Mutation($input: AddActivityInput!) {
-    addActivity(input: $input) {
-      activity {
-        id
-        userDisplayName
-        disciplineDisplayName
-        distance
-        unit
-        score
-        week
-        date
-      }
-      user {
-        id
-      }
-      viewer {
-        id
-      }
-    }
-  }
-`;
-
-const editActivityMutation = graphql`
-  mutation ActivityForm_Edit_Mutation($input: UpdateActivityInput!) {
-    updateActivity(input: $input) {
-      activity {
-        id
-        userDisplayName
-        disciplineDisplayName
-        distance
-        unit
-        score
-        week
-        date
-      }
-      user {
-        id
-      }
-      viewer {
-        id
-      }
-    }
-  }
-`;
 
 export const ActivityFormContainer = createFragmentContainer(
   ActivityForm,

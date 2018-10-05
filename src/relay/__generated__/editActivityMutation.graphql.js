@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2018498cf1ffe17629e0e289618ce98b
+ * @relayHash a45c441eca7155f35dc68ce20ce31a63
  */
 
 /* eslint-disable */
@@ -17,10 +17,10 @@ export type UpdateActivityInput = {
   date: any,
   clientMutationId?: ?string,
 };
-export type ActivityForm_Edit_MutationVariables = {|
+export type editActivityMutationVariables = {|
   input: UpdateActivityInput
 |};
-export type ActivityForm_Edit_MutationResponse = {|
+export type editActivityMutationResponse = {|
   +updateActivity: ?{|
     +activity: ?{|
       +id: string,
@@ -40,15 +40,15 @@ export type ActivityForm_Edit_MutationResponse = {|
     |},
   |}
 |};
-export type ActivityForm_Edit_Mutation = {|
-  variables: ActivityForm_Edit_MutationVariables,
-  response: ActivityForm_Edit_MutationResponse,
+export type editActivityMutation = {|
+  variables: editActivityMutationVariables,
+  response: editActivityMutationResponse,
 |};
 */
 
 
 /*
-mutation ActivityForm_Edit_Mutation(
+mutation editActivityMutation(
   $input: UpdateActivityInput!
 ) {
   updateActivity(input: $input) {
@@ -195,13 +195,13 @@ v3 = [
 return {
   "kind": "Request",
   "operationKind": "mutation",
-  "name": "ActivityForm_Edit_Mutation",
+  "name": "editActivityMutation",
   "id": null,
-  "text": "mutation ActivityForm_Edit_Mutation(\n  $input: UpdateActivityInput!\n) {\n  updateActivity(input: $input) {\n    activity {\n      id\n      userDisplayName\n      disciplineDisplayName\n      distance\n      unit\n      score\n      week\n      date\n    }\n    user {\n      id\n    }\n    viewer {\n      id\n    }\n  }\n}\n",
+  "text": "mutation editActivityMutation(\n  $input: UpdateActivityInput!\n) {\n  updateActivity(input: $input) {\n    activity {\n      id\n      userDisplayName\n      disciplineDisplayName\n      distance\n      unit\n      score\n      week\n      date\n    }\n    user {\n      id\n    }\n    viewer {\n      id\n    }\n  }\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
-    "name": "ActivityForm_Edit_Mutation",
+    "name": "editActivityMutation",
     "type": "Mutation",
     "metadata": null,
     "argumentDefinitions": v0,
@@ -209,12 +209,12 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "ActivityForm_Edit_Mutation",
+    "name": "editActivityMutation",
     "argumentDefinitions": v0,
     "selections": v3
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '5dabf8fa189fd7f74746c132fcb30415';
+(node/*: any*/).hash = '5dca3b53268507a3e86af64c0a5de63b';
 module.exports = node;

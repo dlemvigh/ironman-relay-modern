@@ -1,7 +1,7 @@
 import React from "react";
 import { QueryRenderer } from "react-relay";
 
-import { environment } from "../relay";
+import { environment } from "../relay/environment";
 
 export default ({ 
   Component, 
