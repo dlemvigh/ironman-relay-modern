@@ -10,19 +10,11 @@ const IndexPage = () => (
       query={IndexPageQuery}
       Component={props => <>      
         <ActivityForm 
-          activity={props.viewer.activities.length > 0 ? props.viewer.activities[0] : null}
+          // activity={props.viewer.activities.length > 0 ? props.viewer.activities[0] : null}
           disciplines={props.viewer.disciplines}
           users={props.viewer.users}
         />
-        <hr />
-        {props.viewer.users.filter(user => user.activities.length > 0).map(user => (
-          <React.Fragment key={user.name}>
-            <h2>{user.displayName}</h2>
-            <Activities activities={user.activities} />
-          </React.Fragment>
-        ))}
-        <hr/>
-        <h2>All activities</h2>
+        <h2>Activities</h2>
         <Activities activities={props.viewer.activities} />
       </>}
     />

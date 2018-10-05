@@ -1,18 +1,18 @@
 import React from "react";
 import { createFragmentContainer, graphql } from "react-relay";
+import { Table } from "reactstrap";
 
 export const Activities = (props) => {
   const { activities } = props;
   if (activities && activities.length > 0) {
     return (
-      <table>
+      <Table striped size="sm">
         <thead>
           <tr>
             <th>User</th>
-            <th>Score</th>
             <th>Discipline</th>
             <th>Distance</th>
-            <th>Unit</th>
+            <th>Score</th>
             <th>Date</th>
           </tr>
         </thead>
@@ -20,15 +20,14 @@ export const Activities = (props) => {
           {props.activities.map(act =>
             <tr key={act.id}>
               <td>{act.userDisplayName}</td>
-              <td>{act.score}</td>
               <td>{act.disciplineDisplayName}</td>
-              <td>{act.distance}</td>
-              <td>{act.unit}</td>
+              <td>{act.distance} {act.unit}</td>
+              <td>{act.score}</td>
               <td>{act.date}</td>
             </tr>
           )}
         </tbody>
-      </table>  
+      </Table>  
     )
   }
   return null;
