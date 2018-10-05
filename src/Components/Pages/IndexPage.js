@@ -10,7 +10,7 @@ const IndexPage = () => (
       query={IndexPageQuery}
       Component={props => <>      
         <ActivityForm 
-          viewer={props.viewer}
+          activity={props.viewer.activities.length > 0 ? props.viewer.activities[0] : null}
           disciplines={props.viewer.disciplines}
           users={props.viewer.users}
         />
@@ -32,7 +32,6 @@ const IndexPage = () => (
 const IndexPageQuery = graphql`
   query IndexPageQuery {
     viewer {
-      ...ActivityForm_viewer
       users {
         name
         displayName
@@ -41,7 +40,9 @@ const IndexPageQuery = graphql`
         }  
       }
       activities {
+        id
         ...Activities_activities
+        ...ActivityForm_activity
       }
       disciplines {
         ...ActivityForm_disciplines

@@ -1,7 +1,7 @@
 const { disciplineModel } = require('../models');
 
 module.exports = {
-  async getDiscipline(id) {
+  async getDisciplineById(id) {
     const discipline = await disciplineModel.findById(id);
     return discipline;
   },

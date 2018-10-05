@@ -65,9 +65,9 @@ module.exports = {
 
   async updateActivity(input) {
     if (!(input.distance > 0)) throw "Distance must be >0";
-
+    const { id } = fromGlobalId(input.id);
     const [ activity, user, discipline ] = await Promise.all([
-      activityModel.findById(input.id),
+      activityModel.findById(id),
       userModel.findOne({ name: input.user }),
       disciplineModel.findOne({ name: input.discipline })
     ]);

@@ -116,6 +116,8 @@ input UpdateActivityInput {
 
 type UpdateActivityPayload {
   activity: Activity
+  user: User
+  viewer: Viewer
   clientMutationId: String
 }
 

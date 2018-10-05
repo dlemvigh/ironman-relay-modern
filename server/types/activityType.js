@@ -8,7 +8,7 @@ const {
 const { globalIdField } = require("graphql-relay");
 const { GraphQLDate } = require("graphql-iso-date");
 const { nodeInterface } = require('./nodeType');
-const { getUserById } = require("../query");
+const { getDisciplineById, getUserById } = require("../query");
 
 const activityType = new GraphQLObjectType({
   name: "Activity",
@@ -22,7 +22,8 @@ const activityType = new GraphQLObjectType({
       type: GraphQLString
     },
     discipline: {
-      type: disciplineType
+      type: disciplineType,
+      resolve: (root) => getDisciplineById(root.discipline)  
     },
     disciplineDisplayName: {
       type: GraphQLString

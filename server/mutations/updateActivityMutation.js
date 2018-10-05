@@ -6,7 +6,8 @@ const {
 } = require("graphql");
 const { mutationWithClientMutationId } = require("graphql-relay");
 const { GraphQLDate } = require("graphql-iso-date");
-const { updateActivity } = require("../query");
+const { getUserByName, updateActivity } = require("../query");
+const viewer = require("../models/viewerModel");
 
 const updateActivityMutation = mutationWithClientMutationId({
   name: "UpdateActivity",
@@ -30,16 +31,32 @@ const updateActivityMutation = mutationWithClientMutationId({
   outputFields: () => ({
     activity: {
       type: activityType
+    },
+    user: {
+      type: userType
+    },
+    viewer: {
+      type: viewerType,      
     }
   }),
-  mutateAndGetPayload(input) {
-    const activity = updateActivity(input);
-    return { activity };
+  async mutateAndGetPayload(input) {
+    const [activity, user] = await Promise.all([
+      updateActivity(input),
+      getUserByName(input.user)
+    ]);
+
+    return { 
+      activity,
+      user,
+      viewer
+    };
   }
 })
 
 module.exports = updateActivityMutation;
 
 const {
-  activityType
+  activityType,
+  userType,
+  viewerType
 } = require("../types");
