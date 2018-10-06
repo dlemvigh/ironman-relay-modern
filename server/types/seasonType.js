@@ -6,7 +6,7 @@ const {
 } = require("graphql");
 const { globalIdField } = require("graphql-relay");
 const { nodeInterface } = require('./nodeType');
-
+const { getActivitiesBySeason } = require("../query");
 const seasonType = new GraphQLObjectType({
   name: "Season",
   fields: () => ({
@@ -24,7 +24,8 @@ const seasonType = new GraphQLObjectType({
       type: GraphQLInt
     },
     activities: {
-      type: new GraphQLList(activityType)
+      type: new GraphQLList(activityType),
+      resolve: (root) => getActivitiesBySeason(root.from, root.to)
     }
   }),
   interfaces: [nodeInterface]

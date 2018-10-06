@@ -7,7 +7,7 @@ const {
 } = require("graphql");
 const { globalIdField } = require("graphql-relay");
 const { nodeInterface } = require('./nodeType');
-const { getActivitiesByUser } = require("../query");
+const { getActivitiesByUser, getPositionsByUser, getSummariesByUser } = require("../query");
 
 const userType = new GraphQLObjectType({
   name: "User",
@@ -27,10 +27,12 @@ const userType = new GraphQLObjectType({
       resolve: (root) => getActivitiesByUser(root.id)
     },
     positions: {
-      type: new GraphQLList(positionType)
+      type: new GraphQLList(positionType),
+      resolve: (root) => getPositionsByUser(root.id)
     },
     summaries: {
-      type: new GraphQLList(summaryType)
+      type: new GraphQLList(summaryType),
+      resolve: (root) => getSummariesByUser(root.id)
     },
   }),
   interfaces: [nodeInterface]

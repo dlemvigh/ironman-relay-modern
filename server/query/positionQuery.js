@@ -1,6 +1,11 @@
 const { positionModel, summaryModel } = require("../models");
 
 module.exports = {
+  async getPositionsByUser(user) {
+    const positions = await positionModel.find({ user }).sort({ week: 1 });
+    return positions;
+  },
+
   async getPositionsByWeek(week) {
     const positions = await positionModel.find({ week }).sort({ position: 1 });
     return positions;

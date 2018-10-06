@@ -22,7 +22,8 @@ const activityType = new GraphQLObjectType({
       type: GraphQLString
     },
     discipline: {
-      type: disciplineType
+      type: disciplineType,
+      resolve: (root) => getDiscipline(root.discipline)
     },
     disciplineDisplayName: {
       type: GraphQLString
