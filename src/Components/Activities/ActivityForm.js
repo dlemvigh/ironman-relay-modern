@@ -72,7 +72,7 @@ const handleSubmit = (event) => {
     user: elements.user.value,
     discipline: elements.discipline.value,
     distance: elements.distance.value,
-    date: "2018-10-03"
+    date: "2018-10-08"
   }
 
   const isEdit = !!elements.activityID;
@@ -92,7 +92,6 @@ const handleSubmit = (event) => {
       }
     });  
   }
-
 };
 
 export const ActivityFormContainer = createFragmentContainer(

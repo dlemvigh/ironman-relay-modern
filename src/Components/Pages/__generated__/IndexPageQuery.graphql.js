@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 2d6c661be235343809e1eb2f55f778be
+ * @relayHash 225b3bd28fe642c46a2e996e56394f28
  */
 
 /* eslint-disable */
@@ -10,9 +10,10 @@
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
 type Activities_activities$ref = any;
-type ActivityForm_activity$ref = any;
 type ActivityForm_disciplines$ref = any;
 type ActivityForm_users$ref = any;
+type Season_season$ref = any;
+type Week_week$ref = any;
 export type IndexPageQueryVariables = {||};
 export type IndexPageQueryResponse = {|
   +viewer: ?{|
@@ -24,10 +25,15 @@ export type IndexPageQueryResponse = {|
       |}>,
       +$fragmentRefs: ActivityForm_users$ref,
     |}>,
-    +activities: ?$ReadOnlyArray<?{|
-      +id: string,
-      +$fragmentRefs: Activities_activities$ref & ActivityForm_activity$ref,
-    |}>,
+    +week40: ?{|
+      +season: ?{|
+        +$fragmentRefs: Season_season$ref
+      |},
+      +$fragmentRefs: Week_week$ref,
+    |},
+    +week41: ?{|
+      +$fragmentRefs: Week_week$ref
+    |},
     +disciplines: ?$ReadOnlyArray<?{|
       +$fragmentRefs: ActivityForm_disciplines$ref
     |}>,
@@ -53,10 +59,15 @@ query IndexPageQuery {
       id
       ...ActivityForm_users
     }
-    activities {
-      id
-      ...Activities_activities
-      ...ActivityForm_activity
+    week40: week(week: 201840) {
+      ...Week_week
+      season {
+        ...Season_season
+        id
+      }
+    }
+    week41: week(week: 201841) {
+      ...Week_week
     }
     disciplines {
       ...ActivityForm_disciplines
@@ -81,17 +92,16 @@ fragment ActivityForm_users on User {
   displayName
 }
 
-fragment ActivityForm_activity on Activity {
-  id
-  user {
-    name
+fragment Week_week on Week {
+  week
+  activities {
+    ...Activities_activities
     id
   }
-  discipline {
-    name
-    id
-  }
-  distance
+}
+
+fragment Season_season on Season {
+  displayName
 }
 
 fragment ActivityForm_disciplines on Discipline {
@@ -117,70 +127,103 @@ v1 = {
   "args": null,
   "storageKey": null
 },
-v2 = {
+v2 = [
+  {
+    "kind": "Literal",
+    "name": "week",
+    "value": 201840,
+    "type": "Int!"
+  }
+],
+v3 = {
   "kind": "FragmentSpread",
-  "name": "Activities_activities",
+  "name": "Week_week",
   "args": null
 },
-v3 = {
+v4 = [
+  {
+    "kind": "Literal",
+    "name": "week",
+    "value": 201841,
+    "type": "Int!"
+  }
+],
+v5 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "id",
   "args": null,
   "storageKey": null
 },
-v4 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "userDisplayName",
-  "args": null,
-  "storageKey": null
-},
-v5 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "disciplineDisplayName",
-  "args": null,
-  "storageKey": null
-},
 v6 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "distance",
-  "args": null,
-  "storageKey": null
-},
-v7 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "unit",
   "args": null,
   "storageKey": null
 },
-v8 = {
+v7 = {
   "kind": "ScalarField",
   "alias": null,
   "name": "score",
   "args": null,
   "storageKey": null
 },
+v8 = {
+  "kind": "LinkedField",
+  "alias": null,
+  "name": "activities",
+  "storageKey": null,
+  "args": null,
+  "concreteType": "Activity",
+  "plural": true,
+  "selections": [
+    v5,
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "userDisplayName",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "disciplineDisplayName",
+      "args": null,
+      "storageKey": null
+    },
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "distance",
+      "args": null,
+      "storageKey": null
+    },
+    v6,
+    v7,
+    {
+      "kind": "ScalarField",
+      "alias": null,
+      "name": "date",
+      "args": null,
+      "storageKey": null
+    }
+  ]
+},
 v9 = {
   "kind": "ScalarField",
   "alias": null,
-  "name": "date",
+  "name": "week",
   "args": null,
   "storageKey": null
-},
-v10 = [
-  v0,
-  v3
-];
+};
 return {
   "kind": "Request",
   "operationKind": "query",
   "name": "IndexPageQuery",
   "id": null,
-  "text": "query IndexPageQuery {\n  viewer {\n    users {\n      name\n      displayName\n      activities {\n        ...Activities_activities\n        id\n      }\n      id\n      ...ActivityForm_users\n    }\n    activities {\n      id\n      ...Activities_activities\n      ...ActivityForm_activity\n    }\n    disciplines {\n      ...ActivityForm_disciplines\n      id\n    }\n    id\n  }\n}\n\nfragment Activities_activities on Activity {\n  id\n  userDisplayName\n  disciplineDisplayName\n  distance\n  unit\n  score\n  date\n}\n\nfragment ActivityForm_users on User {\n  name\n  displayName\n}\n\nfragment ActivityForm_activity on Activity {\n  id\n  user {\n    name\n    id\n  }\n  discipline {\n    name\n    id\n  }\n  distance\n}\n\nfragment ActivityForm_disciplines on Discipline {\n  name\n  displayName\n  unit\n  score\n}\n",
+  "text": "query IndexPageQuery {\n  viewer {\n    users {\n      name\n      displayName\n      activities {\n        ...Activities_activities\n        id\n      }\n      id\n      ...ActivityForm_users\n    }\n    week40: week(week: 201840) {\n      ...Week_week\n      season {\n        ...Season_season\n        id\n      }\n    }\n    week41: week(week: 201841) {\n      ...Week_week\n    }\n    disciplines {\n      ...ActivityForm_disciplines\n      id\n    }\n    id\n  }\n}\n\nfragment Activities_activities on Activity {\n  id\n  userDisplayName\n  disciplineDisplayName\n  distance\n  unit\n  score\n  date\n}\n\nfragment ActivityForm_users on User {\n  name\n  displayName\n}\n\nfragment Week_week on Week {\n  week\n  activities {\n    ...Activities_activities\n    id\n  }\n}\n\nfragment Season_season on Season {\n  displayName\n}\n\nfragment ActivityForm_disciplines on Discipline {\n  name\n  displayName\n  unit\n  score\n}\n",
   "metadata": {},
   "fragment": {
     "kind": "Fragment",
@@ -218,7 +261,11 @@ return {
                 "concreteType": "Activity",
                 "plural": true,
                 "selections": [
-                  v2
+                  {
+                    "kind": "FragmentSpread",
+                    "name": "Activities_activities",
+                    "args": null
+                  }
                 ]
               },
               {
@@ -230,20 +277,42 @@ return {
           },
           {
             "kind": "LinkedField",
-            "alias": null,
-            "name": "activities",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "Activity",
-            "plural": true,
+            "alias": "week40",
+            "name": "week",
+            "storageKey": "week(week:201840)",
+            "args": v2,
+            "concreteType": "Week",
+            "plural": false,
             "selections": [
               v3,
-              v2,
               {
-                "kind": "FragmentSpread",
-                "name": "ActivityForm_activity",
-                "args": null
+                "kind": "LinkedField",
+                "alias": null,
+                "name": "season",
+                "storageKey": null,
+                "args": null,
+                "concreteType": "Season",
+                "plural": false,
+                "selections": [
+                  {
+                    "kind": "FragmentSpread",
+                    "name": "Season_season",
+                    "args": null
+                  }
+                ]
               }
+            ]
+          },
+          {
+            "kind": "LinkedField",
+            "alias": "week41",
+            "name": "week",
+            "storageKey": "week(week:201841)",
+            "args": v4,
+            "concreteType": "Week",
+            "plural": false,
+            "selections": [
+              v3
             ]
           },
           {
@@ -291,63 +360,47 @@ return {
             "selections": [
               v0,
               v1,
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "name": "activities",
-                "storageKey": null,
-                "args": null,
-                "concreteType": "Activity",
-                "plural": true,
-                "selections": [
-                  v3,
-                  v4,
-                  v5,
-                  v6,
-                  v7,
-                  v8,
-                  v9
-                ]
-              },
-              v3
+              v8,
+              v5
             ]
           },
           {
             "kind": "LinkedField",
-            "alias": null,
-            "name": "activities",
-            "storageKey": null,
-            "args": null,
-            "concreteType": "Activity",
-            "plural": true,
+            "alias": "week40",
+            "name": "week",
+            "storageKey": "week(week:201840)",
+            "args": v2,
+            "concreteType": "Week",
+            "plural": false,
             "selections": [
-              v3,
-              v4,
-              v5,
-              v6,
-              v7,
-              v8,
               v9,
+              v8,
               {
                 "kind": "LinkedField",
                 "alias": null,
-                "name": "user",
+                "name": "season",
                 "storageKey": null,
                 "args": null,
-                "concreteType": "User",
+                "concreteType": "Season",
                 "plural": false,
-                "selections": v10
-              },
-              {
-                "kind": "LinkedField",
-                "alias": null,
-                "name": "discipline",
-                "storageKey": null,
-                "args": null,
-                "concreteType": "Discipline",
-                "plural": false,
-                "selections": v10
+                "selections": [
+                  v1,
+                  v5
+                ]
               }
+            ]
+          },
+          {
+            "kind": "LinkedField",
+            "alias": "week41",
+            "name": "week",
+            "storageKey": "week(week:201841)",
+            "args": v4,
+            "concreteType": "Week",
+            "plural": false,
+            "selections": [
+              v9,
+              v8
             ]
           },
           {
@@ -361,12 +414,12 @@ return {
             "selections": [
               v0,
               v1,
+              v6,
               v7,
-              v8,
-              v3
+              v5
             ]
           },
-          v3
+          v5
         ]
       }
     ]
@@ -374,5 +427,5 @@ return {
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '50d23856971a522a9fd42460a35867b4';
+(node/*: any*/).hash = 'ec6cdb6883f9e31689d54a45d65b2fa8';
 module.exports = node;

@@ -148,5 +148,6 @@ type Week {
   week: Int
   activities: [Activity]
   positions: [Position]
+  season: Season
   summaries: [Summary]
 }

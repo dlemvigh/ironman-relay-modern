@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const {
   disciplineModel,
-  userModel
+  userModel,
+  seasonModel
 } = require("../server/models");
 
 mongoose.connect('mongodb://localhost/ironman2', { 
@@ -24,6 +25,7 @@ db.once('open', async () => {
 async function populate() {
   await populateUsers();
   await populateDisciplines();
+  await populateSeasons();
 }
 
 async function populateUsers() {
@@ -44,6 +46,18 @@ async function populateDisciplines() {
     { name: "misc", displayName: "Misc", score: 25, unit: "hours", order: 5 },
   ];
   await Promise.all(disciplines.map(disc => ensure(disciplineModel, disc)))
+}
+
+async function populateSeasons() {
+  const seasons = [
+     { name: "spring2018", displayName: "Spring 2018", from: 201802, to: 201820 },
+     { name: "fall2018", displayName: "Fall 2018", from: 201832, to: 201850 }
+  ];
+  await ensureList(seasonModel, seasons);
+}
+
+async function ensureList(model, list) {
+  await Promise.all(list.map(item => ensure(model, item)));
 }
 
 async function ensure(model, data) {
