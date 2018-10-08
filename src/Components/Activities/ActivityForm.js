@@ -30,7 +30,7 @@ const handleSubmit = (event) => {
     user: elements.user.value,
     discipline: elements.discipline.value,
     distance: elements.distance.value,
-    date: "2018-10-03"
+    date: "2018-10-08"
   }
   console.log(input);
   commit({ 
@@ -47,7 +47,6 @@ const handleSubmit = (event) => {
       const oldActs = user.getLinkedRecords("activities") || [];
       const newActs = [...oldActs, newActivity];
       user.setLinkedRecords(newActs, "activities");
-      debugger;
     }
   });
   // event.currentTarget.reset();

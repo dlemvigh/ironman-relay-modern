@@ -3,6 +3,8 @@ import { graphql } from "react-relay";
 import ActivityForm from "../Activities/ActivityForm"; 
 import Activities from "../Activities/Activities";
 import Renderer from "../Renderer";
+import Season from "../Season/Season";
+import Week from "../Week/Week";
 
 const IndexPage = () => (
   <>
@@ -10,6 +12,9 @@ const IndexPage = () => (
       query={IndexPageQuery}
       Component={props => <>      
         <ActivityForm {...props.viewer} />
+        <Week week={props.viewer.week40} />
+        <Week week={props.viewer.week41} />
+        <Season season={props.viewer.week40.season} />
         {props.viewer.users.filter(user => user.activities.length > 0).map(user => (
           <React.Fragment key={user.name}>
             <h2>{user.displayName}</h2>
@@ -30,6 +35,15 @@ const IndexPageQuery = graphql`
         activities {
           ...Activities_activities
         }  
+      }
+      week40: week(week: 201840) {
+        ...Week_week
+        season {
+          ...Season_season
+        }
+      }
+      week41: week(week: 201841) {
+        ...Week_week
       }
       disciplines {
         ...ActivityForm_disciplines
