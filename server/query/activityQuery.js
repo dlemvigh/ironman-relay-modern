@@ -22,6 +22,16 @@ module.exports = {
     return activities;
   },
 
+  async getActivitiesBySeason(from, to) {
+    const activities = await activityModel.find({
+      week: {
+        $gte: from,
+        $lte: to
+      }
+    }).sort({ week: 1});
+    return activities;
+  },
+
   async getActivitiesByWeek(week) {
     const activities = await activityModel.find({ week });
     return activities;
